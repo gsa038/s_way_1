@@ -1,0 +1,12 @@
+.content {
+    grid-area: c;
+    background-color: darkgray;
+  }
+  
+  .content .content_img img {
+    width: 1000px;
+  }
+  
+  .content .ava_img img {
+    width: 150px;
+  }
