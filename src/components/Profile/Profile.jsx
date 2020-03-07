@@ -4,7 +4,7 @@ import MyPosts from './MyPosts/MyPosts';
 
 const Profile = () => {
     return (
-        <div className={classes.content}>
+        <div>
             <div className={classes.content_img}>
                 <img src="https://wallpaperaccess.com/full/121194.jpg"></img>
             </div>
