@@ -9,24 +9,10 @@
     color: black;
 }
 
-.dialogs .dialogs_items {
+.dialogsItems {
     padding: 10px;
-}
-
-.dialogs .active {
-    color: red;
-}
-
-.dialogs .dialog {
-    margin-top: 3px;
-    background-color: azure;
-    border: 1px solid black;
 }
 
 .messages {
     padding: 10px;
-}
-
-.messages .messages_item {
-
 }

@@ -1,0 +1,10 @@
+
+.active {
+    color: red;
+}
+
+.dialog {
+    margin-top: 3px;
+    background-color: azure;
+    border: 1px solid black;
+}
