@@ -3,6 +3,12 @@
     grid-template-columns: 2fr 10fr;
 }
 
+.dialogs a {
+    margin-left: 5px;
+    text-decoration: none;
+    color: black;
+}
+
 .dialogs .dialogs_items {
     padding: 10px;
 }
@@ -12,7 +18,9 @@
 }
 
 .dialogs .dialog {
-
+    margin-top: 3px;
+    background-color: azure;
+    border: 1px solid black;
 }
 
 .messages {

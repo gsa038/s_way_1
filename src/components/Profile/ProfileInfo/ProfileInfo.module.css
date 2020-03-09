@@ -1,0 +1,13 @@
+.profile_img img {
+    width: 1000px;
+  }
+
+.description_block {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    padding: 10px;
+}
+
+.ava_img img {
+    width: 150px;
+  }
