@@ -1,0 +1,15 @@
+.NavFriendsItem {
+    display: grid;
+    padding: 15px;
+}
+
+.ava_img {
+    width: 50px;
+    justify-self: center;
+}
+
+.nickname{
+    color: indianred;
+    border-radius: 5px;
+    background-color: beige;
+}

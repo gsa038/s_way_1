@@ -1,0 +1,13 @@
+.messageItem {
+    padding: 10px;
+    background-color: khaki;
+    border-radius: 5px;
+    width: fit-content;
+    margin-top: 5px;
+}
+
+.myMessage {
+    margin-left: auto;
+    margin-right: 0em;
+    background-color: rgb(176, 240, 248);
+}

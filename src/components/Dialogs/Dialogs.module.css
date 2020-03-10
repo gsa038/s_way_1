@@ -1,18 +1,28 @@
 .dialogs {
     display: grid;
-    grid-template-columns: 2fr 10fr;
+    grid-template-columns: 2fr auto 10fr;
+    height: 100%;
 }
 
 .dialogs a {
-    margin-left: 5px;
     text-decoration: none;
     color: black;
 }
 
 .dialogsItems {
-    padding: 10px;
+    padding: 20px;
+}
+
+.verticalSeparator {
+    background-color: rgb(129, 129, 129);
+    width: 3px;
+    border-radius: 1.5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .messages {
-    padding: 10px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
 }

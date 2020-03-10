@@ -2,8 +2,13 @@ import React from 'react';
 import s from './Message.module.css';
 
 const Message = (props) => {
+
+    const messageItemClassName = props.state.isMyMessage ? 
+                                        s.messageItem + ' ' + s.myMessage : 
+                                        s.messageItem;
+
     return (
-    <div className={s.message_item}>{props.message}</div>        
+        <div className={messageItemClassName}>{props.state.message}</div>
     );
 }
 
