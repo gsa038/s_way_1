@@ -9,8 +9,12 @@ const MyPosts = (props) => {
     let newPostElement = React.createRef();
 
     let addPost = () => {
+        props.newPostText? props.addPost(props.newPostText):alert('Post can\'t be empty');
+    };
+
+    let updateNewPostText = () => {
         let text = newPostElement.current.value;
-        props.addPost(text);
+        props.updateNewPostText(text);
     };
 
     return (
@@ -18,7 +22,7 @@ const MyPosts = (props) => {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea ref={newPostElement}></textarea>
+                    <textarea ref={newPostElement} onChange={updateNewPostText} value={props.newPostText}/>
                 </div>
                 <div>
                     <button onClick={ addPost }>Add post</button>
