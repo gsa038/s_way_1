@@ -5,10 +5,9 @@ import Message from './Message/Message';
 import SendMessage from './SendMessage/SendMesssage';
 
 const Dialogs = (props) => {
-
     let dialogsElements = props.state.dialogs.map(d => (<DialogItem name={d.name} id={d.id} />));
     let messagesElements = props.state.messages.map(state => (<Message state={state} />));
-
+    
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
@@ -19,7 +18,7 @@ const Dialogs = (props) => {
                 <div className={s.messages}>
                     {messagesElements}
                 </div>
-                <SendMessage newMessageText={props.state.newMessageText} newMessage={props.newMessage} updateNewMessageText={props.updateNewMessageText} />
+                <SendMessage state={props.state} newMessage={props.newMessage} updateNewMessageText={props.updateNewMessageText} />
             </div>
         </div>
     );
