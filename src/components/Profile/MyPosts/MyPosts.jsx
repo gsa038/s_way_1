@@ -9,12 +9,25 @@ const MyPosts = (props) => {
     let newPostElement = React.createRef();
 
     let addPost = () => {
-        props.newPostText? props.addPost(props.newPostText):alert('Post can\'t be empty');
+        if (props.newPostText) {
+            let action = {
+                type: 'ACTION-POST'
+            }
+            props.dispatch(action)
+        } else {
+            alert('Post can\'t be empty');
+        }
     };
 
     let updateNewPostText = () => {
+
         let text = newPostElement.current.value;
-        props.updateNewPostText(text);
+        let action = {
+            type: 'UPDATE-NEW-POST-TEXT',
+            postText: text
+        }
+        
+        props.dispatch(action);
     };
 
     return (

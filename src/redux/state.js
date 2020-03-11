@@ -6,7 +6,7 @@ let store = {
             profilePage: {
                 posts: [
                     { id: 1, message: "Hi, how are you?", likesCounts: 15 },
-                    { id: 2, message: "It\'s my first post", likesCounts: 20 },
+                    { id: 2, message: "It's my first post", likesCounts: 20 },
                     { id: 3, message: "BlaBla", likesCounts: 30 },
                     { id: 4, message: "Lala", likesCounts: 40 }
                 ],
@@ -45,28 +45,44 @@ let store = {
         _callSubscriber() {
             console.log('State changed');
         },
-        addPost() {
+        _addPost() {
             let newPost = { id: 5, message: this._state.profilePage.newPostText, likesCounts: 0 };
             this._state.profilePage.posts.push(newPost);
             this._state.profilePage.newPostText = '';
             this._callSubscriber(this._state);
         },
-        updateNewPostText(text) {
+        _updateNewPostText(text) {
             this._state.profilePage.newPostText = text;
             this._callSubscriber(this._state);
         },
-        newMessage() {
+        _newMessage() {
             let newMessage = { id: 6, message: this._state.dialogsPage.newMessageText, dialogId: 2, isMyMessage: true }
             this._state.dialogsPage.messages.push(newMessage);
             this._state.dialogsPage.newMessageText = '';
             this._callSubscriber(this._state);
         },
-        updateNewMessageText(text) {
+        _updateNewMessageText(text) {
             this._state.dialogsPage.newMessageText = text;
             this._callSubscriber(this._state);
         },
         subscribe(observer) {
             this._callSubscriber = observer;
+        },
+        dispatch(action) {
+            if (action.type === 'ACTION-POST') {
+                this._addPost();
+            } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+                this._updateNewPostText(action.postText)
+            } else if (action.type === 'ACTION-MESSAGE') {
+                let newMessage = { id: 6, message: this._state.dialogsPage.newMessageText, dialogId: 2, isMyMessage: true }
+                this._state.dialogsPage.messages.push(newMessage);
+                this._state.dialogsPage.newMessageText = '';
+                this._callSubscriber(this._state);
+            } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+                this._state.dialogsPage.newMessageText = action.messageText;
+                this._callSubscriber(this._state);
+            }
+             
         }
 }
 
