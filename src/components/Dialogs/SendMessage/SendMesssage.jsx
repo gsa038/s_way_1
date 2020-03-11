@@ -6,9 +6,7 @@ const SendMessage = (props) => {
     let newMessageElement = React.createRef();
 
     let newMessage = () => {
-        // props.newMessageText? 
-        props.newMessage(props.newMessageText);
-        // : alert('Message can\'t be empty');
+        props.newMessageText? props.newMessage(props.newMessageText): alert('Message can\'t be empty');
     };
 
     let updateNewMessageText = () => {
