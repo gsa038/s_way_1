@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
+import { addPostActionCreator, updateNewPostActionCreator } from '../../../redux/state'
 
 const MyPosts = (props) => {
 
@@ -10,24 +11,15 @@ const MyPosts = (props) => {
 
     let addPost = () => {
         if (props.newPostText) {
-            let action = {
-                type: 'ACTION-POST'
-            }
-            props.dispatch(action)
+            props.dispatch(addPostActionCreator())
         } else {
             alert('Post can\'t be empty');
         }
     };
 
     let updateNewPostText = () => {
-
         let text = newPostElement.current.value;
-        let action = {
-            type: 'UPDATE-NEW-POST-TEXT',
-            postText: text
-        }
-        
-        props.dispatch(action);
+        props.dispatch(updateNewPostActionCreator(text));
     };
 
     return (
