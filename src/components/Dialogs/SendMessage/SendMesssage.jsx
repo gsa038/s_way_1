@@ -1,5 +1,6 @@
 import React from 'react';
 import s from './SendMessage.module.css';
+import { addMessageActionCreator, updateNewMessageActionCreator } from '../../../redux/state';
 
 const SendMessage = (props) => {
     
@@ -7,10 +8,7 @@ const SendMessage = (props) => {
 
     let newMessage = () => {
         if (props.state.newMessageText) {
-            let action = {
-                type: 'ACTION-MESSAGE'
-            }
-            props.dispatch(action)
+            props.dispatch(addMessageActionCreator())
         } else {
             alert('Message can\'t be empty');
         }
@@ -18,11 +16,7 @@ const SendMessage = (props) => {
 
     let updateNewMessageText = () => {
         let text = newMessageElement.current.value;
-        let action = {
-            type : 'UPDATE-NEW-MESSAGE-TEXT',
-            messageText : text
-        }
-        props.dispatch(action);
+        props.dispatch(updateNewMessageActionCreator(text));
     };
 
     return (
