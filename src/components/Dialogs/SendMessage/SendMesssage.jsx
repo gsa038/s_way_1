@@ -1,28 +1,26 @@
 import React from 'react';
 import s from './SendMessage.module.css';
-import { addMessageActionCreator, updateNewMessageActionCreator } from '../../../redux/state';
+import { sendMessageCreator, updateNewMessageTextCreator } from '../../../redux/dialogs-reducer';
 
 const SendMessage = (props) => {
     
-    let newMessageElement = React.createRef();
-
     let newMessage = () => {
         if (props.state.newMessageText) {
-            props.dispatch(addMessageActionCreator())
+            props.dispatch(sendMessageCreator())
         } else {
             alert('Message can\'t be empty');
         }
     };
 
-    let updateNewMessageText = () => {
-        let text = newMessageElement.current.value;
-        props.dispatch(updateNewMessageActionCreator(text));
+    let updateNewMessageText = (e) => {
+        let text = e.target.value;
+        props.dispatch(updateNewMessageTextCreator(text));
     };
 
     return (
         <div className={s.sendBlock}>
             <div className={s.sendTextAreaBlock}>
-                <textarea className={s.sendTextArea} ref={newMessageElement} onChange={updateNewMessageText} value={props.state.newMessageText}></textarea>
+                <textarea placeholder="Enter your message here" className={s.sendTextArea} onChange={updateNewMessageText} value={props.state.newMessageText}></textarea>
             </div>
             <div className={s.sendButtonBlock}>
                 <button className={s.sendButton} onClick={newMessage}>Send message</button>

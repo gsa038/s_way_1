@@ -1,25 +1,23 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
-import { addPostActionCreator, updateNewPostActionCreator } from '../../../redux/state'
+import { addPostCreator, updateNewPostCreator } from '../../../redux/profile-reducer'
 
 const MyPosts = (props) => {
 
     let postsElements = props.posts.map( p => <Post message={p.message} likesCounts={p.likesCounts}/>);
 
-    let newPostElement = React.createRef();
-
     let addPost = () => {
         if (props.newPostText) {
-            props.dispatch(addPostActionCreator())
+            props.dispatch(addPostCreator())
         } else {
             alert('Post can\'t be empty');
         }
     };
 
-    let updateNewPostText = () => {
-        let text = newPostElement.current.value;
-        props.dispatch(updateNewPostActionCreator(text));
+    let updateNewPostText = (e) => {
+        let text = e.target.value;
+        props.dispatch(updateNewPostCreator(text));
     };
 
     return (
@@ -27,7 +25,7 @@ const MyPosts = (props) => {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea ref={newPostElement} onChange={updateNewPostText} value={props.newPostText}/>
+                    <textarea placeholder="Enter your post here" onChange={updateNewPostText} value={props.newPostText}/>
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>
