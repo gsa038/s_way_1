@@ -4,8 +4,8 @@ import NavFriendsItem from './NavFriendsItem/NavFriendsItem';
 
 const NavFriends = (props) => {
 
-    let NavFriendsElements = props.state.map(f => (<NavFriendsItem nickname={f.nickname} ava={f.ava} />))
-    
+    let NavFriendsElements = props.friends.map(f => (<NavFriendsItem nickname={f.nickname} ava={f.ava} />))
+
     return (
         <div>
             <h3>Friends</h3>

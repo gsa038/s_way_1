@@ -1,26 +1,37 @@
 import React from 'react';
 import Dialogs from './Dialogs';
 import { sendMessageCreator, updateNewMessageTextCreator } from '../../redux/dialogs-reducer';
+import StoreContext from '../../StoreContext';
 
 const DialogsContainer = (props) => {
 
-    let state = props.store.getState().dialogsPage;
 
-    let newMessage = () => {
-        if (state.newMessageText) {
-            props.store.dispatch(sendMessageCreator())
-        } else {
-            alert('Message can\'t be empty');
-        }
-    };
 
-    let updateNewMessageText = (text) => {
-        props.store.dispatch(updateNewMessageTextCreator(text));
-    };
+    return (
 
-    return <Dialogs dialogsPage={state}
-                    newMessage={newMessage} 
+        <StoreContext.Consumer> 
+            { (store) => {
+                let state = store.getState().dialogsPage;
+
+                let newMessage = () => {
+                    if (state.newMessageText) {
+                        store.dispatch(sendMessageCreator())
+                    } else {
+                        alert('Message can\'t be empty');
+                    }
+                };
+
+                let updateNewMessageText = (text) => {
+                    store.dispatch(updateNewMessageTextCreator(text));
+                };
+                return <Dialogs dialogsPage={state}
+                    newMessage={newMessage}
                     updateNewMessageText={updateNewMessageText} />
+            }
+        }
+        </StoreContext.Consumer>
+
+    )
 }
 
 export default DialogsContainer;
