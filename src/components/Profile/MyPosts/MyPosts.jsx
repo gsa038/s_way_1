@@ -4,13 +4,14 @@ import Post from './Post/Post';
 
 const MyPosts = (props) => {
 
-    let postsElements = props.posts.map( p => <Post message={p.message} likesCounts={p.likesCounts}/>);
+    let postsElements = props.profilePage.posts.map( p => <Post message={p.message} likesCounts={p.likesCounts}/>);
 
     let addPost = () => {
         props.addPost();
     };
 
     let updateNewPostText = (e) => {
+
         let text = e.target.value;
         props.updateNewPostText(text);
     };
@@ -20,7 +21,7 @@ const MyPosts = (props) => {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea placeholder="Enter your post here" onChange={updateNewPostText} value={props.newPostText}/>
+                    <textarea placeholder="Enter your post here" onChange={updateNewPostText} value={props.profilePage.newPostText}/>
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>
