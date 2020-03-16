@@ -3,12 +3,12 @@ import s from './Message.module.css';
 
 const Message = (props) => {
 
-    const messageItemClassName = props.state.isMyMessage ? 
+    const messageItemClassName = props.message.isMyMessage ? 
                                         s.messageItem + ' ' + s.myMessage : 
                                         s.messageItem;
 
     return (
-        <div className={messageItemClassName}>{props.state.message}</div>
+        <div className={messageItemClassName}>{props.message.message}</div>
     );
 }
 

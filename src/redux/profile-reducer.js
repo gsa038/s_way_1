@@ -12,15 +12,18 @@ let initialState = {
 }
 
 const _addPost = (state) => {
-    let newPost = { id: 5, message: state.newPostText, likesCounts: 0 };
-    state.posts.push(newPost);
-    state.newPostText = '';
-    return state;
+    return {
+        ...state,
+        newPostText: '',
+        posts: [...state.posts, { id: 5, message: state.newPostText, likesCounts: 0 }]
+    };
 }
 
 const _updateNewPostText = (state, text) => {
-    state.newPostText = text;
-    return state;
+    return {
+        ...state,
+        newPostText: text
+    };
 }
 
 const profileReducer = (state = initialState, action) => {

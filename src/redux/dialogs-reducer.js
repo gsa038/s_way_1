@@ -19,15 +19,18 @@ let initialState = {
 }
 
 const _newMessage = (state) => {
-    let newMessage = { id: 6, message: state.newMessageText, dialogId: 2, isMyMessage: true }
-    state.messages.push(newMessage);
-    state.newMessageText = '';
-    return state;
+    return {
+        ...state,
+        newMessageText: '',
+        messages: [...state.messages, { id: 6, message: state.newMessageText, dialogId: 2, isMyMessage: true } ]
+    };
 }
 
 const _updateNewMessageText = (state, text) => {
-    state.newMessageText = text;
-    return state;
+    return {
+        ...state,
+        newMessageText: text
+    };
 }
 
 const dialogsReducer =  (state = initialState, action) => {
