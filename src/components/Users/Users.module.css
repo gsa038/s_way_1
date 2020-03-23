@@ -2,3 +2,19 @@
     width: 150px;
     border-radius: 5px;
 }
+
+.usersContainer {
+    /* overflow: hidden; */
+    display: flex;
+    flex-wrap: wrap;
+    /* width: 30em; */
+
+}
+
+.userItem {
+    margin: 5px;
+    height: fit-content;
+    width: fit-content;
+    border: 1px solid green;
+    border-radius: 5px;
+}
