@@ -1,6 +1,6 @@
 .friendsElements {
     display: flex;
     flex-wrap: wrap;
-    align-items: stretch;
+    justify-content: space-evenly;
     background-color: lightslategray;
 }

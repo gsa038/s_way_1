@@ -4,11 +4,11 @@
 }
 
 .usersContainer {
-    /* overflow: hidden; */
     display: flex;
     flex-wrap: wrap;
-    /* width: 30em; */
-
+    justify-content: center;
+    padding-left: 1em;
+    padding-right: 1em;
 }
 
 .userItem {
@@ -17,4 +17,12 @@
     width: fit-content;
     border: 1px solid green;
     border-radius: 5px;
+}
+
+.paginator {
+    text-align: center;
+}
+
+.selectedPage {
+    font-weight: bold;
 }

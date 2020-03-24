@@ -6,39 +6,66 @@ import userPhoto from '../../assets/images/236832.png';
 class Users extends React.Component {
     
     componentDidMount() {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users?count=100")
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        .then(response => {
+            this.props.setUsers(response.data.items);
+            this.props.setTotalUsersCount(response.data.totalCount);
+        });
+    }
+
+    onPageChanged = (pageNumber) => {
+        this.props.setCurrentPage(pageNumber);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
         .then(response => {
             this.props.setUsers(response.data.items)
         });
     }
 
     render() {
-        return <div className={s.usersContainer}>
-            {
-             this.props.users.map( u => <div className={s.userItem} key={u.id}>
-                <span>
-                    <div>
-                        <img src={u.photos.small != null ? u.photos.small : userPhoto } alt="ava" className={s.userPhoto}/>
-                    </div>
-                    <div>
-                <button onClick={() =>{this.props.toggleFollow(u.id)}}>{ u.isFollowed ? "Unfollow" : "Follow"}</button>
 
-                    </div>
-                </span>
-                <span>
+        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
+
+        let pages = [];
+        
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i);
+        }
+
+        return <div>
+            <div className={s.paginator}>
+                {pages.map( p => {
+                    return <span className={ this.props.currentPage === p && s.selectedPage }
+                    onClick={() => {this.onPageChanged(p)}}>{p}</span>
+                    })
+                }
+            </div>
+            <div className={s.usersContainer}>
+                {
+                 this.props.users.map( u => <div className={s.userItem} key={u.id}>
+                    <span>
+                        <div>
+                            <img src={u.photos.small != null ? u.photos.small : userPhoto } alt="ava" className={s.userPhoto}/>
+                        </div>
+                        <div>
+                    <button onClick={() =>{this.props.toggleFollow(u.id)}}>{ u.isFollowed ? "Unfollow" : "Follow"}</button>
+
+                        </div>
+                    </span>
                     <span>
                         <span>
-                            <div>{u.name}</div>
-                            <div>{u.status}</div>
+                            <span>
+                                <div>{u.name}</div>
+                                <div>{u.status}</div>
+                            </span>
+                        </span>
+                        <span>
+                            <div>{"u.location.country"}</div>
+                            <div>{"u.location.city"}</div>
                         </span>
                     </span>
-                    <span>
-                        <div>{"u.location.country"}</div>
-                        <div>{"u.location.city"}</div>
-                    </span>
-                </span>
-                </div>)
-            } 
+                    </div>)
+                } 
+            </div>
         </div>
     }
 }
