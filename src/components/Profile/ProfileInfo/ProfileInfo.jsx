@@ -1,7 +1,11 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
+import Preloader from '../../common/Preloader/Preloader';
 
 const ProfileInfo = (props) => {
+    if (!props.userProfile) {
+        return <Preloader />
+    }
     return (
         <div>
             <div className={s.profile_img}>
@@ -9,10 +13,15 @@ const ProfileInfo = (props) => {
             </div>
             <div className={s.description_block}>
                 <div className={s.ava_img}>
-                    <img src="https://www.softpaz.com/wallpapers/download/12365/moody-tiger-2560-1600.jpg" alt="Avatar"></img>
+                    <img src={props.userProfile.photos.large} alt="Avatar"></img>
                 </div>
                 <div>
-                    profile info
+                    <div>Обо мне:</div>
+                    <div>{props.userProfile.aboutMe}</div>
+                    <div>Контакты:</div>
+                    { 
+                        Object.entries(props.userProfile.contacts).map(([k, v]) => v ? <div>{k}: {v}</div>: null) 
+                    }
                 </div>
             </div>
         </div>

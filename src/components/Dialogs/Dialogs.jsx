@@ -8,8 +8,8 @@ const Dialogs = (props) => {
     let dialogsElements = props.dialogsPage.dialogs.map(d => (<DialogItem name={d.name} key={d.id} id={d.id} />));
     let messagesElements = props.dialogsPage.messages.map(m => (<Message message={m} key={m.id} />));
 
-    let newMessage = () => {
-        props.newMessage();
+    let sendMessage = () => {
+        props.sendMessage();
     }
     
     let updateNewMessageText = (e) => {
@@ -33,7 +33,7 @@ const Dialogs = (props) => {
                             <textarea placeholder="Enter your message here" className={s.sendTextArea} onChange={updateNewMessageText} value={props.dialogsPage.newMessageText}></textarea>
                         </div>
                         <div className={s.sendButtonBlock}>
-                            <button className={s.sendButton} onClick={newMessage}>Send message</button>
+                            <button className={s.sendButton} onClick={sendMessage}>Send message</button>
                         </div>
                     </div>
                 </div>
