@@ -1,4 +1,7 @@
 .header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   margin-top: 10px;
   margin-left: 10px;
   margin-right: 10px;
@@ -8,4 +11,13 @@
   
 .header img {
   width: 114px;
+}
+
+.loginBlock {
+  margin: auto 10px;
+  float: right;
+}
+
+.loginBlock a {
+  color: white;
 }

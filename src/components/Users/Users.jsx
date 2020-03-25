@@ -2,6 +2,7 @@ import React from 'react';
 import s from './Users.module.css';
 import userPhoto from '../../assets/images/236832.png';
 import { NavLink } from 'react-router-dom';
+import * as axios from 'axios';
 
 let Users = (props) => {
 
@@ -31,7 +32,35 @@ let Users = (props) => {
                             </div>
                         </NavLink>
                         <div>
-                            <button onClick={() => { props.toggleFollow(u.id) }}>{u.isFollowed ? "Unfollow" : "Follow"}</button>
+                            <button onClick={() => {
+                                u.isFollowed
+                                    ? (
+                                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                                            withCredentials: true,
+                                            headers: {
+                                                "API-KEY": "40a499b6-4421-4c8e-b336-09492ab319c5"
+                                            }
+                                        })
+                                        .then(response => {
+                                            if (response.data.resultCode === 0) {
+                                                props.toggleFollow(u.id)           
+                                            }
+                                        })
+                                    )
+                                    : (
+                                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
+                                            withCredentials: true,
+                                            headers: {
+                                                "API-KEY": "40a499b6-4421-4c8e-b336-09492ab319c5"
+                                            }
+                                        })
+                                        .then(response => {
+                                            if (response.data.resultCode === 0) {
+                                                props.toggleFollow(u.id)           
+                                            }
+                                        })
+                                    )
+                                }}>{u.isFollowed ? "Unfollow" : "Follow"}</button>
                         </div>
                     </span>
                     <span>
