@@ -75,7 +75,7 @@ export const follow = (follow, userId) => {
         dispatch(toggleFollowingProgress(true, userId));
         usersAPI.follow(follow, userId)
         .then(data => {
-            if (data.resultCode === 0) {
+            if (data.resultCode === 0 || 1) {
                 dispatch(toggleFollow(userId));
             }
             dispatch(toggleFollowingProgress(false, userId));

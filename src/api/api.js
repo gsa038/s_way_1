@@ -20,4 +20,18 @@ export const usersAPI = {
     }
 }
 
+export const authAPI = {
+
+    auth() {
+        return instance.get(`auth/me`)
+    }
+}
+
+export const profileAPI = {
+
+    getProfile(userId) {
+        return instance.get(`profile/` + userId)
+    }
+}
+
 export default null;
