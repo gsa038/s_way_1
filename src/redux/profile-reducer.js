@@ -50,11 +50,11 @@ export const updateNewPostText = (text) => ({
         postText: text
     })
 
-export const showProfile = (userId) => {
+export const getUserProfile = (userId) => {
     return (dispatch) => {
         profileAPI.getProfile(userId)
-        .then(response => {
-            dispatch(setUserProfile(response.data));
+            .then(response => {
+                dispatch(setUserProfile(response.data));
         });
     } 
 }

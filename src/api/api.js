@@ -17,12 +17,15 @@ export const usersAPI = {
     follow(follow, userId) {
         return (follow ? instance.post(`follow/${userId}`) : instance.delete(`follow/${userId}`))
             .then(response => response.data)
+    },
+    getProfile(userId) {
+        return instance.get(`profile/` + userId)
     }
 }
 
 export const authAPI = {
 
-    auth() {
+    authMe() {
         return instance.get(`auth/me`)
     }
 }
