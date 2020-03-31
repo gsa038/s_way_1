@@ -3,6 +3,7 @@ import { profileAPI } from "../api/api"
 const ADD_POST = 'ADD_POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
+const SET_STATUS = 'SET_STATUS'
 
 let initialState = {
     posts: [
@@ -12,6 +13,7 @@ let initialState = {
         { id: 4, message: "Lala", likesCounts: 40 }
     ],
     newPostText: '',
+    status: null,
     userProfile: null
 }
 
@@ -38,6 +40,8 @@ const profileReducer = (state = initialState, action) => {
             return _updateNewPostText(state, action.postText);
         case SET_USER_PROFILE:
             return { ...state, userProfile: action.userProfile};
+        case SET_STATUS:
+            return { ...state, status: action.status }
         default:
             return state;
     }
@@ -45,10 +49,36 @@ const profileReducer = (state = initialState, action) => {
 
 export const addPost = () =>  ({ type: ADD_POST })
 export const setUserProfile = (userProfile) =>  ({ type: SET_USER_PROFILE, userProfile })
+export const setStatus = (status) =>  ({ type: SET_STATUS, status })
 export const updateNewPostText = (text) => ({
         type: UPDATE_NEW_POST_TEXT,
         postText: text
     })
+
+export const getStatus = (userId) => {
+    return (dispatch) => {
+        profileAPI.getStatus(userId)
+            .then(response => {
+                dispatch(setStatus(response.data));
+        });
+    } 
+}
+
+export const updateStatus = (status) => {
+    return (dispatch) => {
+        profileAPI.updateStatus(status)
+            .then(response => {
+                if (response.data.resultCode === 0)
+                {
+                    dispatch(setStatus(status));
+                }
+                else
+                {
+                    dispatch(setStatus('Can\'t load status message from server'));
+                }
+        });
+    } 
+}
 
 export const getUserProfile = (userId) => {
     return (dispatch) => {
