@@ -34,5 +34,6 @@ let mapStateToProps = (state) => ({
 export default compose(
     connect(mapStateToProps, { setUserProfile, getUserProfile }),
     withRouter,
-    withAuthRedirect)
+    withAuthRedirect
+    )
     (ProfileContainer);
