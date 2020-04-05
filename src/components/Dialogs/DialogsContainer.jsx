@@ -1,5 +1,5 @@
 import Dialogs from './Dialogs';
-import { sendMessage, updateNewMessageText } from '../../redux/dialogs-reducer';
+import { sendMessage } from '../../redux/dialogs-reducer';
 import { connect } from 'react-redux';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
@@ -10,8 +10,16 @@ let mapStateToProps = (state) => {
     }
 }
 
+let mapDispatchToProps = (dispatch) => {
+    return {
+    sendMessage: (newMessageText) => {
+            dispatch(sendMessage(newMessageText));
+        }
+    }
+}
+
 const DialogsContainer = compose(
-    connect(mapStateToProps, { updateNewMessageText, sendMessage}),
+    connect(mapStateToProps, mapDispatchToProps),    
     withAuthRedirect)
     (Dialogs);
 
