@@ -29,11 +29,15 @@ export const authAPI = {
     authMe() {
         return instance.get(`auth/me`);
     },
-    login(email, password, rememberMe=false) {
-        return instance.post('/auth/login', {email: email, password: password, rememberMe: rememberMe});
+    login(email, password, rememberMe=false, captchaString) {
+        // alert(`captchaString: ${captchaString}`)
+        return instance.post('/auth/login', {email: email, password: password, rememberMe: rememberMe, captcha: captchaString});
     },
     logout() {
         return instance.delete('/auth/login');
+    },
+    getCaptcha() {
+        return instance.get('/security/get-captcha-url')
     }
 }
 

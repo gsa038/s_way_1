@@ -19,7 +19,10 @@ class ProfileContainer extends React.Component {
 
         return (
             <div>
-                <Profile {...this.props} userProfile={this.props.userProfile} status={this.props.status} updateStatus={this.props.updateStatus} />
+                <Profile {...this.props} 
+                    userProfile={this.props.userProfile}
+                    status={this.props.status} 
+                    updateStatus={this.props.updateStatus} />
             </div>
         );
     }
