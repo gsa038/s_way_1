@@ -25,7 +25,7 @@ let Users = (props) => {
                     <img src={u.photos.small != null ? u.photos.small : userPhoto } alt="ava" className={s.userPhoto}/>
                 </div>
                 <div>
-            <button onClick={() =>{props.toggleFollow(u.id)}}>{ u.isFollowed ? "Unfollow" : "Follow"}</button>
+            <button onClick={() =>{props.toggleFollow(u.id)}}>{ u.followed ? "Unfollow" : "Follow"}</button>
                     
                 </div>
             </span>

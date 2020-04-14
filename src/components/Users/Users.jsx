@@ -2,7 +2,6 @@ import React from 'react';
 import s from './Users.module.css';
 import userPhoto from '../../assets/images/236832.png';
 import { NavLink } from 'react-router-dom';
-// import {usersAPI} from '../../api/api';
 
 
 let Users = (props) => {
@@ -24,7 +23,7 @@ let Users = (props) => {
         </div>
         <div className={s.usersContainer}>
             {
-                props.users.map(u => <div className={s.userItem} key={u.id}>
+                props.users.map(u  => <div className={s.userItem} key={u.id}>
                     <span>
                         <NavLink to={'/profile/' + u.id}>
                             <div>
@@ -33,10 +32,10 @@ let Users = (props) => {
                         </NavLink>
                         <div>
                             <button disabled={props.followingInProgress.some(id => id ===u.id)} onClick={() => {
-                                u.isFollowed
+                                u.followed
                                 ? props.follow(false, u.id)
                                 : props.follow(true, u.id)
-                            }}>{u.isFollowed ? "Unfollow" : "Follow"}</button>
+                            }}>{u.followed ? "Unfollow" : "Follow"}</button>
                         </div>
                     </span>
                     <span>
