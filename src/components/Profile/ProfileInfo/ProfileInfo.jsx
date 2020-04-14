@@ -3,6 +3,7 @@ import s from './ProfileInfo.module.css';
 import Preloader from '../../common/Preloader/Preloader';
 import userPhoto from '../../../assets/images/236832.png';
 import ProfileStatus from './ProfileStatus';
+import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 
 const ProfileInfo = (props) => {
     if (!props.userProfile) {
@@ -16,7 +17,7 @@ const ProfileInfo = (props) => {
             <div className={s.description_block}>
                 <div className={s.ava_img}>
                     <img src={props.userProfile.photos.large ? props.userProfile.photos.large : userPhoto} alt="Avatar"></img>
-                    <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
+                    <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
                     <div>{'ID: ' + props.userProfile.userId}</div>
                 </div>
                 <div>
