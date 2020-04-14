@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './Login.module.css';
+// import style from './Login.module.css';
 import formStyle from '../common/FormsControls/FormsControl.module.css'
 import { reduxForm, Field } from 'redux-form';
 import { required, maxlength } from '../../utils/validators/validators';

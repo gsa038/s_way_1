@@ -1,5 +1,5 @@
 import React from 'react';
-import { toggleFollow, setCurrentPage, toggleIsFetching, getUsers, toggleFollowingProgress, follow } from '../../redux/users-reducer';
+import { toggleFollow, toggleIsFetching, getUsers, toggleFollowingProgress, follow } from '../../redux/users-reducer';
 import {connect} from 'react-redux';
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';

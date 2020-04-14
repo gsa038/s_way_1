@@ -17,7 +17,7 @@ class ProfileContainer extends React.Component {
     }
 
     render () {
-
+        console.log("Profile render")
         return (
             <div>
                 <Profile {...this.props} 
@@ -29,11 +29,14 @@ class ProfileContainer extends React.Component {
     }
 }
 
-let mapStateToProps = (state) => ({
+let mapStateToProps = (state) => {
+    console.log("Profile mapStateToProps")
+    return ({
     userProfile: state.profilePage.userProfile,
     status: state.profilePage.status,
     auth: state.auth
 });
+}
 
 
 
