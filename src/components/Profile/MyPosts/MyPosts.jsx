@@ -8,23 +8,36 @@ import { InputArea } from '../../common/FormsControls/FormsControls';
 const maxlength10 = maxlength(10);
 const textArea = InputArea("textarea")
 
-const MyPosts = (props) => {
+class MyPosts extends React.PureComponent {
 
-    let postsElements = props.profilePage.posts.map( p => <Post message={p.message} key={p.id} likesCounts={p.likesCounts}/>);
+    componentDidMount() {
+        setTimeout( () => {
+            this.setState({a: 15})
+        }, 5000)
+    }
 
-    let addPost = (values) => {
-        props.addPost(values.newPostText);
-    };
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     return nextProps !== this.props || nextState !== this.state
+    // }
 
-    return (
-        <div className={s.posts_block}>
-            <h3>My posts</h3>
-            <AddPostReduxForm onSubmit={addPost}/>
-            <div className={s.posts}>
-                { postsElements }
-            </div >
-        </div>
-    );
+    render() {
+        console.log('render MyPosts')
+        let postsElements = this.props.posts.map( p => <Post message={p.message} key={p.id} likesCounts={p.likesCounts}/>);
+
+        let addPost = (values) => {
+            this.props.addPost(values.newPostText);
+        };
+
+        return (
+            <div className={s.posts_block}>
+                <h3>My posts</h3>
+                <AddPostReduxForm onSubmit={addPost}/>
+                <div className={s.posts}>
+                    { postsElements }
+                </div >
+            </div>
+        );
+    }
 }
 
 const AddPostForm = (props) => {
