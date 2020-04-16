@@ -11,10 +11,6 @@ let initialState = {
     ]
 }
 
-const navigationReducer =  (state = initialState, action) => {
-    
-
-    return state;
-}
+const navigationReducer =  (state = initialState, action) => state;
 
 export default navigationReducer;
