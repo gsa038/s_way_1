@@ -5,8 +5,8 @@ import userPhoto from '../../../assets/images/236832.png';
 // import ProfileStatus from './ProfileStatus';
 import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 
-const ProfileInfo = (props) => {
-    if (!props.userProfile) {
+const ProfileInfo = ({ userProfile, status, updateStatus }) => {
+    if (!userProfile) {
         return <Preloader />
     }
     return (
@@ -16,18 +16,18 @@ const ProfileInfo = (props) => {
             </div> */}
             <div className={s.description_block}>
                 <div className={s.ava_img}>
-                    <img src={props.userProfile.photos.large ? props.userProfile.photos.large : userPhoto} alt="Avatar"></img>
-                    <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
-                    <div>{'ID: ' + props.userProfile.userId}</div>
+                    <img src={userProfile.photos.large ? userProfile.photos.large : userPhoto} alt="Avatar"></img>
+                    <ProfileStatusWithHooks status={status} updateStatus={updateStatus} />
+                    <div>{'ID: ' + userProfile.userId}</div>
                 </div>
                 <div>
                     <div>Полное имя:</div>
-                    <div>{props.userProfile.fullName}</div>
+                    <div>{userProfile.fullName}</div>
                     <div>Обо мне:</div>
-                    <div>{props.userProfile.aboutMe}</div>
+                    <div>{userProfile.aboutMe}</div>
                     <div>Контакты:</div>
                     { 
-                        Object.entries(props.userProfile.contacts).map(([k, v]) => v ? <div>{k}: {v}</div>: null) 
+                        Object.entries(userProfile.contacts).map(([k, v]) => v ? <div>{k}: {v}</div>: null) 
                     }
                 </div>
             </div>

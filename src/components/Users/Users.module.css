@@ -18,11 +18,3 @@
     border: 1px solid green;
     border-radius: 5px;
 }
-
-.paginator {
-    text-align: center;
-}
-
-.selectedPage {
-    font-weight: bold;
-}
