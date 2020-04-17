@@ -3,7 +3,7 @@ import s from './NavFriends.module.css';
 import NavFriendsItem from './NavFriendsItem/NavFriendsItem'; 
 
 const NavFriends = (props) => {
-
+    
     let NavFriendsElements = props.friends.map(f => (<NavFriendsItem nickname={f.nickname} key={f.id} ava={f.ava} />))
 
     return (
