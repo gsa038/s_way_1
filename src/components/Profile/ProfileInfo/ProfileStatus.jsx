@@ -19,13 +19,13 @@ class ProfileStatus extends React.Component {
             editMode: false
         });
         //// Check this code
-        if (this.state.status !== this.props.status)
-        {
+        // if (this.state.status !== this.props.status)
+        // {
             this.props.updateStatus(this.state.status);
-            this.setState({
-                status: this.props.status
-            });
-        }
+            // this.setState({
+            //     status: this.props.status
+            // });
+        // }    
         //// May be you don't need if statement
     }
 
