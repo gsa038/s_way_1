@@ -1,14 +1,45 @@
 .paginator {
+    width: 40em;
+    height: 2em;
+    font-size: large;
     text-align: center;
-    margin: 2px;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
 }
 
 .pageNumber.selectedPage {
     font-weight: bold;
+    background-color: gold;
     border-color: black;
 }
 
 .pageNumber {
     padding: 2px;
-    border: solid grey 1px;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 1em;
+}
+
+.pageNumber:hover {
+    background-color: gray;
+}
+
+.portionPrevButton, 
+.portionNextButton {
+    /* background-color: lightgrey; */
+    border: none;
+    /* border-radius: 1em; */
+    width: 5em;
+    font-weight: bold;
+    font-stretch: expanded;
+}
+
+.portionPrevButton:hover,
+.portionNextButton:hover {
+    background-color: yellowgreen;
+    border-radius: 0.2em;
+    border-color: greenyellow;    
 }
