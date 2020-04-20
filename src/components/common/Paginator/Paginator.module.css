@@ -1,5 +1,5 @@
 .paginator {
-    width: 40em;
+    width: 25em;
     height: 2em;
     font-size: large;
     text-align: center;
@@ -11,35 +11,52 @@
 }
 
 .pageNumber.selectedPage {
-    font-weight: bold;
-    background-color: gold;
+    font-weight: 500;
+    background-color: #5cbcf6;
     border-color: black;
 }
 
+.pageNumber.selectedPage:hover {
+    font-weight: 500;
+    background-color: #5cbcf6;
+}
+
 .pageNumber {
-    padding: 2px;
-    width: 1.5em;
-    height: 1.5em;
-    border-radius: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2em;
+    height: 2em;
+    border-radius: 2em;
 }
 
 .pageNumber:hover {
-    background-color: gray;
+    background-color: rgb(196, 196, 196);
 }
 
 .portionPrevButton, 
 .portionNextButton {
-    /* background-color: lightgrey; */
+    background-color: #0e83cd;
+    color: rgb(255, 255, 255);
     border: none;
-    /* border-radius: 1em; */
     width: 5em;
+    border-radius: 0.1em;
+    border: solid 1px;
     font-weight: bold;
-    font-stretch: expanded;
+    letter-spacing: 1px;
 }
 
-.portionPrevButton:hover,
+.portionPrevButton:hover {
+    background-color: #5cbcf6;
+    transform: skew(+15deg);
+}
+
 .portionNextButton:hover {
-    background-color: yellowgreen;
-    border-radius: 0.2em;
-    border-color: greenyellow;    
+    background-color: #5cbcf6;
+    transform: skew(-15deg);
+}
+
+.portionPrevButton:focus,
+.portionNextButton:focus {
+    outline: none;
 }
