@@ -14,7 +14,7 @@ import { connect, Provider } from "react-redux";
 import { initializeApp } from './redux/app-reducer';
 import { compose } from "redux";
 import Preloader from "./components/common/Preloader/Preloader";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import store from "./redux/redux-store";
 import { withSuspense } from "./hoc/withSuspense";
 
@@ -67,11 +67,11 @@ let AppContainer = compose(
 
 let MainApp = (props) => {
   return (
-  <BrowserRouter>
+  <HashRouter>
     <Provider store={store}>
       <AppContainer />
     </Provider>
-  </BrowserRouter >
+  </HashRouter >
 )}
 
 export default MainApp;

@@ -1,9 +1,10 @@
 import { profileAPI } from "../api/api"
 
-const ADD_POST = 'ADD_POST'
-const DELETE_POST = 'DELETE_POST'
-const SET_USER_PROFILE = 'SET_USER_PROFILE'
-const SET_STATUS = 'SET_STATUS'
+const ADD_POST = 's_way_1/pofile/ADD_POST'
+const DELETE_POST = 's_way_1/pofile/DELETE_POST'
+const SET_USER_PROFILE = 's_way_1/pofile/SET_USER_PROFILE'
+const SET_STATUS = 's_way_1/pofile/SET_STATUS'
+const UPLOAD_PHOTO_SUCCESS = 's_way_1/pofile/UPLOAD_PHOTO_SUCCESS'
 
 let initialState = {
     posts: [
@@ -29,6 +30,8 @@ const profileReducer = (state = initialState, action) => {
             return { ...state, userProfile: action.userProfile};
         case SET_STATUS:
             return { ...state, status: action.status }
+        case UPLOAD_PHOTO_SUCCESS:
+            return { ...state, userProfile: {...state.userProfile, photos: action.photos}}
         default:
             return state;
     }
@@ -38,6 +41,7 @@ export const addPost = (newPostText) =>  ({ type: ADD_POST, newPostText })
 export const deletePost = (postId) => ({type: DELETE_POST, postId})
 export const setUserProfile = (userProfile) =>  ({ type: SET_USER_PROFILE, userProfile })
 export const setStatus = (status) =>  ({ type: SET_STATUS, status })
+export const uploadPhotoSuccess = (photos) => ({ type: UPLOAD_PHOTO_SUCCESS, photos})
 
 export const getStatus = (userId) => async (dispatch) => {
     let response = await profileAPI.getStatus(userId);
@@ -59,6 +63,14 @@ export const updateStatus = (status) => async (dispatch) => {
 export const getUserProfile = (userId) => async (dispatch) => {
     let response = await profileAPI.getProfile(userId);
     dispatch(setUserProfile(response.data));
-} 
+}
+
+export const uploadPhoto = (file) => async (dispatch) => {
+    let response = await profileAPI.uploadPhoto(file);
+    if (response.status === 200)
+    {
+        dispatch(uploadPhotoSuccess(response.data.data.photos));
+    }
+}
 
 export default profileReducer;
