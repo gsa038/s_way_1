@@ -5,7 +5,7 @@ import {reduxForm, Field } from 'redux-form';
 import { required, maxlength } from '../../../utils/validators/validators';
 import { InputArea } from '../../common/FormsControls/FormsControls';
 
-const maxlength10 = maxlength(10);
+const maxPostLength10 = maxlength(10, 'post');
 const textArea = InputArea("textarea")
 
 const MyPosts = props => {
@@ -15,6 +15,7 @@ const MyPosts = props => {
         props.addPost(values.newPostText);
     };
     return (
+        props.isOwner &&
         <div className={s.posts_block}>
             <h3>My posts</h3>
             <AddPostReduxForm onSubmit={addPost}/>
@@ -32,7 +33,7 @@ const AddPostForm = (props) => {
             <Field component={textArea} 
                 name="newPostText" 
                 placeholder="Enter your post here" 
-                validate={[required, maxlength10]}/>
+                validate={[required, maxPostLength10]}/>
         </div>
         <div>
             <button>Add post</button>

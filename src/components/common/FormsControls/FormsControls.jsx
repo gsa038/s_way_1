@@ -15,8 +15,10 @@ export const InputArea = InputType => ({input, meta: {touched, error}, ...props}
     )    
 }
 
-export const createField = (placeholder, name, validators, component, props = {}, text = "") => (
+export const createField = (placeholder, name, validators, component, props = {}, text = "") => {
+    return (
     <div>
         <Field placeholder={placeholder} name={name} component={component} validate={validators} {...props}  /> {text}
     </div>
-)
+    )
+}

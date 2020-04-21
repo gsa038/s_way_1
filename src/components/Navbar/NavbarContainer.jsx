@@ -4,7 +4,8 @@ import {connect} from 'react-redux';
 
 let mapStateToProps = (state) => {
   return {
-    friends: state.navigationData.friends
+    friends: state.navigationData.friends,
+    isAuth: state.auth.isAuth
   }
 }
 

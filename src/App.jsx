@@ -4,10 +4,7 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import { Route, withRouter } from "react-router";
-// import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import NavbarContainer from "./components/Navbar/NavbarContainer";
-// import UsersContainer from "./components/Users/UsersContainer";
-// import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginPage from "./components/Login/LoginContainer";
 import { connect, Provider } from "react-redux";
@@ -35,21 +32,22 @@ class App extends React.Component {
     }
     else {
       return (
-        <div className="app-wrapper">
-          <HeaderContainer />
-          <NavbarContainer />
-          <div className="app-wrapper-content">
-            {/* <Route path='/' render={() => <ProfileContainer />} /> */}
-            <Route path='/profile/:userId?' 
-                    render={withSuspense(ProfileContainer)} />
-            <Route path='/login' render={() => <LoginPage />} />
-            <Route path='/dialogs' 
-                    render={withSuspense(DialogsContainer)} />
-            <Route path='/news  ' render={() => <News />} />
-            <Route path='/music' render={() => <Music />} />
-            <Route path='/users' 
-                    render={withSuspense(UsersContainer)} />
-            <Route path='/settings' render={() => <Settings />} />
+        <div>
+          <Route path='/login' render={() => <LoginPage />} />
+          <div className="app-wrapper">
+            <HeaderContainer />
+            <NavbarContainer />
+            <div className="app-wrapper-content">
+              <Route path='/profile/:userId?' 
+                      render={withSuspense(ProfileContainer)} />
+              <Route path='/dialogs' 
+                      render={withSuspense(DialogsContainer)} />
+              <Route path='/news  ' render={() => <News />} />
+              <Route path='/music' render={() => <Music />} />
+              <Route path='/users' 
+                      render={withSuspense(UsersContainer)} />
+              <Route path='/settings' render={() => <Settings />} />
+            </div>
           </div>
         </div>
       );

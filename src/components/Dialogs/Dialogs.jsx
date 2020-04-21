@@ -33,7 +33,7 @@ const Dialogs = (props) => {
     );
 }
 
-const maxlength20 = maxlength(20); 
+const maxMessagelength20 = maxlength(20, 'post'); 
 
 const AddMessageForm = (props) => {
     return (
@@ -41,7 +41,7 @@ const AddMessageForm = (props) => {
             <div className={s.sendBlock}>
                 <div className={s.sendTextAreaBlock}>
                     <Field component={textArea} name="newMessageText"
-                        validate={[required, maxlength20]}
+                        validate={[required, maxMessagelength20]}
                         placeholder="Enter your message here"
                         className={s.sendTextArea} />
                 </div>

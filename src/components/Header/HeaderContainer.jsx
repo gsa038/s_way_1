@@ -2,11 +2,13 @@ import React from 'react';
 import Header from './Header';
 import { connect } from 'react-redux';
 import {doLogout} from '../../redux/auth-reducer';
+import { compose } from 'redux';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
 class HeaderContainer extends React.Component {
-
+    
     render() {
-        return <Header {...this.props} />
+        return this.props.isAuth && <Header {...this.props} />
     }
 }
 
@@ -15,4 +17,7 @@ const mapStateToProps = (state) => ({
     login: state.auth.login,
     userId: state.auth.userId
 })
-export default connect(mapStateToProps, {doLogout}) (HeaderContainer);
+export default compose(
+    connect(mapStateToProps, {doLogout}),
+    withAuthRedirect)
+     (HeaderContainer);

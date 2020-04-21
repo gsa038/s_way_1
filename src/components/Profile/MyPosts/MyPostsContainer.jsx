@@ -1,7 +1,20 @@
-// import React from 'react';
+import React from 'react';
 import MyPosts from './MyPosts';
 import { addPost } from '../../../redux/profile-reducer';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { withRouter } from 'react-router';
+
+
+class MyPostsContainer extends React.Component {
+    render() {
+        return (
+            <div>
+                <MyPosts {...this.props} isOwner={!this.props.match.params.userId} posts={this.props.posts} />
+            </div>
+        );
+    }
+}
 
 let mapStateToProps = (state) => {
     return {
@@ -17,4 +30,8 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyPosts);
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withRouter
+    )
+    (MyPostsContainer);

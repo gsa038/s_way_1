@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from '../../common/Preloader/Preloader';
-import userPhoto from '../../../assets/images/236832.png';
+import defaultUserPhoto from '../../../assets/images/236832.png';
 // import ProfileStatus from './ProfileStatus';
 import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 
@@ -24,7 +24,7 @@ const ProfileInfo = ({ isOwner, userProfile, status, updateStatus, uploadPhoto }
             </div> */}
             <div className={s.description_block}>
                 <div className={s.ava_img}>
-                    <img src={userProfile.photos.large || userPhoto} alt="Avatar"></img>
+                    <img src={userProfile.photos.large || defaultUserPhoto} alt="Avatar"></img>
                     {isOwner && <div>
                         <input type="file" onChange={onMainPhotoSelected} />
                     </div>}
@@ -32,8 +32,7 @@ const ProfileInfo = ({ isOwner, userProfile, status, updateStatus, uploadPhoto }
                     <div>{'ID: ' + userProfile.userId}</div>
                 </div>
                 <div>
-                    <div>Полное имя:</div>
-                    <div>{userProfile.fullName}</div>
+                    <div>Полное имя: {userProfile.fullName}</div>
                     <div>Обо мне:</div>
                     <div>{userProfile.aboutMe}</div>
                     <div>Контакты:</div>
