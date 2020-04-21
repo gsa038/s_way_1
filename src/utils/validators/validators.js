@@ -1,5 +1,6 @@
 export const required = value => {
-     return value ? undefined : `Field is required` 
+        return value ? undefined : `Field is required` 
+        
 }
 
 export const maxlength = (maxLengthValue, fieldName='item') => value => {

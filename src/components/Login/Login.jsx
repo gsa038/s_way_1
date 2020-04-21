@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './Login.module.css';
 import formStyle from '../common/FormsControls/FormsControl.module.css'
-import { reduxForm } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 import { required } from '../../utils/validators/validators';
 import { InputArea, createField } from '../common/FormsControls/FormsControls';
 import { Redirect } from 'react-router';
@@ -15,7 +15,11 @@ const LoginForm = ({ handleSubmit, error, captchaUrl }) => {
                 <div className={s.loginForm}>
                     {createField("Email...", "email", [required], input)}
                     {createField("Password...", "password", [required], input, { type: "password" })}
-                    {createField(null, "rememberMe", [], input, { type: "checkbox"}, "remember me")}
+                    {/* {createField(null, "rememberMe", [], input, { type: "checkbox", className: "sss"}, "remember me")} */}
+                    <div className={s.rememberMeArea}>
+                    <Field type="checkbox" name="rememberMe" component={input} className={s.rememberMeBox}  />
+                    <span className={s.rememberMeText}>remember me</span>
+                    </div>
                     {error &&
                         <div className={formStyle.formSummaryError}>
                             {error}
