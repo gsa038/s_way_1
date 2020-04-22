@@ -16,7 +16,7 @@ const ProfileInfo = ({ isOwner, userProfile, status, updateStatus, uploadPhoto }
             uploadPhoto(e.target.files[0]);
         }
     }
-
+    debugger;
     return (
         <div>
             {/* <div className={s.profile_img}>
@@ -31,14 +31,15 @@ const ProfileInfo = ({ isOwner, userProfile, status, updateStatus, uploadPhoto }
                     <ProfileStatusWithHooks status={status} updateStatus={updateStatus} />
                     <div>{'ID: ' + userProfile.userId}</div>
                 </div>
-                <div>
-                    <div>Полное имя: {userProfile.fullName}</div>
-                    <div>Обо мне:</div>
+                <div className="">
+                    <div>FullName: {userProfile.fullName}</div>
+                    <div>About me:</div>
                     <div>{userProfile.aboutMe}</div>
-                    <div>Контакты:</div>
+                    <div>Contacts:</div>
                     { 
                         Object.entries(userProfile.contacts).map(([k, v]) => v ? <div>{k}: {v}</div>: null) 
                     }
+                    <div>Looking for a job: {userProfile.lookingForAJob ? "Yes" : "No"}</div>
                 </div>
             </div>
         </div>
