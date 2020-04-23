@@ -1,13 +1,47 @@
-.profile_img img {
-    width: 1000px;
-  }
-
-.description_block {
+.description {
     display: grid;
     grid-template-columns: 2fr 10fr;
-    padding: 10px;
+    padding: 1.2em;
+    /* margin-top: ; */
 }
-
+.contactsChilds {
+  border-bottom: none;
+}
+.descriptionRightColunn {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+}
+.descriptionItem {
+  margin-bottom: 0.5em;
+  border-bottom: solid 1px lightgrey;
+  width: fit-content;
+}
+.editDescriptionButton {
+  font-family: "Roboto", sans-serif;
+  border-bottom: none;
+  outline: 0;
+  background: none;
+  width: fit-content;
+  border: 0;
+  color: lightgrey;
+  font-size: 14px;
+  /* transition: all 0.3 ease; */
+  cursor: pointer;
+  border: solid 1px white;
+  border-radius: 0.2em;
+  transition: all 1s;
+}
+.editDescriptionButton:hover {
+  color: black;
+  border: solid 1px black;
+  transition: all 1s;
+}
 .ava_img img {
     width: 150px;
   }
+.contactsChilds > div {
+  margin-left: 2em;
+  width: fit-content;
+  border-bottom: solid 1px lightgrey;
+}
