@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import {doLogin, doLogout} from '../../redux/auth-reducer';
+import {doLogin, doLogout, getCaptcha} from '../../redux/auth-reducer';
 import Login from './Login';
 
 const mapStateToProps = (state) => ({
@@ -7,4 +7,4 @@ const mapStateToProps = (state) => ({
     captchaUrl: state.auth.captchaUrl
 })
 
-export default connect(mapStateToProps, { doLogin, doLogout }) (Login);
+export default connect(mapStateToProps, { doLogin, doLogout, getCaptcha }) (Login);

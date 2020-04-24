@@ -8,7 +8,7 @@ import { Redirect } from 'react-router';
 
 const input = InputArea("input")
 
-const LoginForm = ({ handleSubmit, error, captchaUrl }) => {
+const LoginForm = ({ handleSubmit, error, captchaUrl, getCaptcha }) => {
     return (
         <form className={s.login} onSubmit={handleSubmit}>
             <div className={s.loginPage}>
@@ -31,7 +31,7 @@ const LoginForm = ({ handleSubmit, error, captchaUrl }) => {
                     {captchaUrl &&
                         <div>
                             <div>
-                                <img src={captchaUrl} alt="CaptchaImg" />
+                                <img onClick={getCaptcha} src={captchaUrl} alt="CaptchaImg" />
                             </div>
                             {createField("Input captcha data", "captchaString", [], input)}
                         </div>
@@ -52,7 +52,7 @@ const Login = (props) => {
         return <Redirect to={"/profile"} />
     }
     return <div>
-        <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl} />
+        <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl} getCaptcha={props.getCaptcha} />
     </div>
 }
 
