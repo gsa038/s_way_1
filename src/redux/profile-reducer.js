@@ -1,10 +1,12 @@
-import { profileAPI } from "../api/api"
+import { profileAPI } from "../api/api";
+import { stopSubmit } from 'redux-form';
 
 const ADD_POST = 's_way_1/pofile/ADD_POST'
 const DELETE_POST = 's_way_1/pofile/DELETE_POST'
 const SET_USER_PROFILE = 's_way_1/pofile/SET_USER_PROFILE'
 const SET_STATUS = 's_way_1/pofile/SET_STATUS'
 const UPLOAD_PHOTO_SUCCESS = 's_way_1/pofile/UPLOAD_PHOTO_SUCCESS'
+// const SAVE_PROFILE = 's_way_1/pofile/SAVE_PROFILE'
 
 let initialState = {
     posts: [
@@ -32,6 +34,8 @@ const profileReducer = (state = initialState, action) => {
             return { ...state, status: action.status }
         case UPLOAD_PHOTO_SUCCESS:
             return { ...state, userProfile: {...state.userProfile, photos: action.photos}}
+        // case SAVE_PROFILE:
+        //     return { ...state, userProfile: {...state.userProfile, userProfile: action.userProfile}}
         default:
             return state;
     }
@@ -44,12 +48,12 @@ export const setStatus = (status) =>  ({ type: SET_STATUS, status })
 export const uploadPhotoSuccess = (photos) => ({ type: UPLOAD_PHOTO_SUCCESS, photos})
 
 export const getStatus = (userId) => async (dispatch) => {
-    let response = await profileAPI.getStatus(userId);
+    const response = await profileAPI.getStatus(userId);
     dispatch(setStatus(response.data));
 }
 
 export const updateStatus = (status) => async (dispatch) => {
-    let response = await profileAPI.updateStatus(status);
+    const response = await profileAPI.updateStatus(status);
     if (response.data.resultCode === 0)
     {
         dispatch(setStatus(status));
@@ -61,16 +65,32 @@ export const updateStatus = (status) => async (dispatch) => {
 } 
 
 export const getUserProfile = (userId) => async (dispatch) => {
-    let response = await profileAPI.getProfile(userId);
+    const response = await profileAPI.getProfile(userId);
     dispatch(setUserProfile(response.data));
 }
 
 export const uploadPhoto = (file) => async (dispatch) => {
-    let response = await profileAPI.uploadPhoto(file);
+    const response = await profileAPI.uploadPhoto(file);
     if (response.status === 200)
     {
         dispatch(uploadPhotoSuccess(response.data.data.photos));
     }
+}
+
+export const saveProfile = (profileData) => async (dispatch, getState) => {
+    console.log(profileData)
+    const response = await profileAPI.saveProfile(profileData);
+    console.log(response)
+    if (response.data.resultCode === 0)
+    {        
+        // dispatch(setUserProfile(profileData)) //My variant
+        dispatch(getUserProfile(getState().auth.userId))
+    }
+    else 
+    {
+        // let message = response.data.messages.length > 0 ?  : "Some error";
+        dispatch(stopSubmit("editProfile", {_error: response.data.messages[0]}));
+    };
 }
 
 export default profileReducer;

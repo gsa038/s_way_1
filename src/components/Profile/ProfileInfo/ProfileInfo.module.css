@@ -1,16 +1,23 @@
 .description {
-    display: grid;
-    grid-template-columns: 2fr 10fr;
+    display: flex;
+    margin: 1.2em;
     padding: 1.2em;
-    /* margin-top: ; */
+    width: fit-content;
+    height: fit-content;
+    border: solid 1px lightgray;
+    border-radius: 0.2em;
 }
-.contactsChilds {
-  border-bottom: none;
+.contactsBlock {
+  margin-bottom: 0.5em;
 }
 .descriptionRightColunn {
+  margin-left: 3em;
+  padding: 1em;
   display: flex;
   flex-direction: column;
   width: fit-content;
+  border: solid 1px lightgray;
+  border-radius: 0.2em;
 }
 .descriptionItem {
   margin-bottom: 0.5em;
@@ -26,7 +33,6 @@
   border: 0;
   color: lightgrey;
   font-size: 14px;
-  /* transition: all 0.3 ease; */
   cursor: pointer;
   border: solid 1px white;
   border-radius: 0.2em;
@@ -40,8 +46,16 @@
 .ava_img img {
     width: 150px;
   }
-.contactsChilds > div {
+.contactsBlock > div {
   margin-left: 2em;
   width: fit-content;
   border-bottom: solid 1px lightgrey;
+}
+.contactsBlock a {
+  color: lightgray;
+  font-size: 1em;
+}
+.contactsBlock:hover a {
+  color: black;
+  font-size: 1em;
 }

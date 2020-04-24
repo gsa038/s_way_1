@@ -5,8 +5,9 @@ import defaultUserPhoto from '../../../assets/images/236832.png';
 // import ProfileStatus from './ProfileStatus';
 import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 import cn from 'classnames';
+import ProfileDataForm from './ProfileDataForm';
 
-const ProfileInfo = ({ isOwner, userProfile, status, updateStatus, uploadPhoto }) => {
+const ProfileInfo = ({ isOwner, userProfile, status, updateStatus, uploadPhoto, saveProfile }) => {
     
     let [editMode, setEditMode] = useState(false);
     const deactivateEditMode = () => {
@@ -21,6 +22,16 @@ const ProfileInfo = ({ isOwner, userProfile, status, updateStatus, uploadPhoto }
             uploadPhoto(e.target.files[0]);
         }
     }
+
+    const onSubmit = (formData) => {
+        saveProfile(formData);
+        // setEditMode(false);
+    }
+
+    const offEditMode = () => {
+        setEditMode(false);
+    }
+
     return (
         <div>
             <div className={s.description}>
@@ -32,14 +43,15 @@ const ProfileInfo = ({ isOwner, userProfile, status, updateStatus, uploadPhoto }
                         </div>}
                     </div>
                     <div>
-                        <ProfileStatusWithHooks status={status} updateStatus={updateStatus} />
+                        <ProfileStatusWithHooks status={status} isOwner={isOwner} updateStatus={updateStatus} />
                     </div>
                 </div>
                 { editMode 
-                    ? <ProfileDataForm userProfile={userProfile} /> 
-                    : <ProfileData 
+                    ? <ProfileDataForm initialValues={userProfile} onSubmit={onSubmit} offEditMode={offEditMode} /> 
+                    : <ProfileData
+                        className={s.descriptionRightColunn}
                         userProfile={userProfile} 
-                        isOwner={isOwner} 
+                        isOwner={isOwner}
                         goToEditMode={ () => {setEditMode(true)} } 
                         deactivateEditMode={ deactivateEditMode } /> }
             </div>
@@ -49,24 +61,17 @@ const ProfileInfo = ({ isOwner, userProfile, status, updateStatus, uploadPhoto }
 
 const ProfileData = ({userProfile, isOwner, goToEditMode}) => {
     return (
-    <div>
-        {isOwner && <div className><button className={s.editDescriptionButton} onClick={goToEditMode}>edit</button></div>}
+    <div className={s.descriptionRightColunn}>
+        {isOwner && <div><button className={s.editDescriptionButton} onClick={goToEditMode}>edit</button></div>}
         <div className={s.descriptionItem}><b>Fullname:</b> {userProfile.fullName}</div>
+        <div className={s.descriptionItem}><b>Contacts:</b></div>
+        <div className={cn(s.contactsBlock)}>{
+            Object.entries(userProfile.contacts).map(([k, v]) => v ? <div key={k}><b>{k}</b>: <a target="_blank" href={v}>{v}</a></div> : null)
+        }</div>
+        <div className={s.descriptionItem}><b>Looking for a job:</b> {userProfile.lookingForAJob ? "Yes" : "No"}</div>
+        {userProfile.lookingForAJob && <div className={s.descriptionItem}><b>My professionals skills:</b> {userProfile.lookingForAJobDescription}</div>}
         <div className={s.descriptionItem}><b>About me:</b></div>
         <div className={s.descriptionItem}>{userProfile.aboutMe}</div>
-        <div className={s.descriptionItem}><b>Contacts:</b></div>
-        <div className={cn(s.contactsChilds, s.descriptionItem)}>{
-            Object.entries(userProfile.contacts).map(([k, v]) => v ? <div><b>{k}</b>: {v}</div> : null)
-        }</div>
-        <div><b>Looking for a job:</b> {userProfile.lookingForAJob ? "Yes" : "No"}</div>
-        {userProfile.lookingForAJob && <div><b>My professionals skills:</b> userProfile.lookingForAJobDescription</div>}
-    </div>
-    )
-}
-const ProfileDataForm = ({userProfile}) => {
-    return (
-    <div className={s.descriptionRightColumn}>
-        Form
     </div>
     )
 }
