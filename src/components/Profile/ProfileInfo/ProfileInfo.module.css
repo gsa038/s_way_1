@@ -51,11 +51,10 @@
   width: fit-content;
   border-bottom: solid 1px lightgrey;
 }
-.contactsBlock a {
+.contactLink {
   color: lightgray;
   font-size: 1em;
 }
-.contactsBlock:hover a {
+.contactLink:hover {
   color: black;
-  font-size: 1em;
 }

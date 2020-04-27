@@ -66,8 +66,8 @@ const ProfileData = ({userProfile, isOwner, goToEditMode}) => {
         {isOwner && <div><button className={s.editDescriptionButton} onClick={goToEditMode}>edit</button></div>}
         <div className={s.descriptionItem}><b>Fullname:</b> {userProfile.fullName}</div>
         <div className={s.descriptionItem}><b>Contacts:</b></div>
-        <div className={cn(s.contactsBlock)}>{
-            Object.entries(userProfile.contacts).map(([k, v]) => v ? <div key={k}><b>{k}</b>: <a target="_blank" href={v}>{v}</a></div> : null)
+        <div className={s.contactsBlock}>{
+            Object.entries(userProfile.contacts).map(([k, v]) => v ? <div key={k}><b>{k}</b>: <a className={s.contactLink} target="_blank" href={v}>{v}</a></div> : null)
         }</div>
         <div className={s.descriptionItem}><b>Looking for a job:</b> {userProfile.lookingForAJob ? "Yes" : "No"}</div>
         {userProfile.lookingForAJob && <div className={s.descriptionItem}><b>My professionals skills:</b> {userProfile.lookingForAJobDescription}</div>}

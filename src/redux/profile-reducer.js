@@ -88,12 +88,10 @@ export const saveProfile = (profileData) => async (dispatch, getState) => {
     }
     else 
     {
-        // let errors = Object.values(response.data.messages).map((k, v) => ([, message]]);
         var errors = {};
         response.data.messages.forEach((message) => {
             errors[/(?<=Contacts->)[A-z]+/.exec(message)[0].toLowerCase()] = message;
         })
-        
         response.data.messages && dispatch(stopSubmit("editProfile", {"contacts": errors}));
         return Promise.reject();
     };

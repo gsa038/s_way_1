@@ -8,13 +8,14 @@ import { InputArea } from '../common/FormsControls/FormsControls';
 
 const textArea = InputArea("textarea")
 
-const Dialogs = (props) => {
+const Dialogs = ({dialogsPage, sendMessage}) => {
 
-    let dialogsElements = props.dialogsPage.dialogs.map(d => (<DialogItem name={d.name} key={d.id} id={d.id} />));
-    let messagesElements = props.dialogsPage.messages.map(m => (<Message message={m} key={m.id} />));
+    let dialogsElements = dialogsPage.dialogs.map(d => (<DialogItem name={d.name} key={d.id} id={d.id} />));
+    let messagesElements = dialogsPage.messages.map(m => (<Message message={m} key={m.id} />));
 
     let addNewMessage = (values) => {
-        props.sendMessage(values.newMessageText);
+        sendMessage(values.newMessageText);
+        values.newMessageText = null;
     }
 
     return (
@@ -35,9 +36,9 @@ const Dialogs = (props) => {
 
 const maxMessagelength20 = maxlength(20, 'post'); 
 
-const AddMessageForm = (props) => {
+const AddMessageForm = ({handleSubmit}) => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div className={s.sendBlock}>
                 <div className={s.sendTextAreaBlock}>
                     <Field component={textArea} name="newMessageText"
