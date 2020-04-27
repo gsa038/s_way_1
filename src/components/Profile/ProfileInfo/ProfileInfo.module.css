@@ -1,23 +1,25 @@
 .description {
     display: flex;
     margin: 1.2em;
-    padding: 1.2em;
+    /* padding: 1.2em; */
     width: fit-content;
     height: fit-content;
-    border: solid 1px lightgray;
+    /* border: solid 1px lightgray; */
     border-radius: 0.2em;
 }
 .contactsBlock {
   margin-bottom: 0.5em;
 }
 .descriptionRightColunn {
-  margin-left: 3em;
+  background-color: white;
+  margin-left: 1.5em;
   padding: 1em;
   display: flex;
   flex-direction: column;
   width: fit-content;
   border: solid 1px lightgray;
   border-radius: 0.2em;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 .descriptionItem {
   margin-bottom: 0.5em;
@@ -46,6 +48,35 @@
 .ava_img img {
     width: 150px;
   }
+.avaInput {
+  width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.avaBlock {
+  padding: 1em;
+  background-color: white;
+  border: solid 1px lightgray;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  border-radius: 0.2em;
+  display: block;
+  text-align: center;
+  align-content: center;
+}
+.avaInput + .avaInputLabel {
+  font-size: 1em;
+  font-weight: 500;
+  width: fit-content;
+  color: lightgray;
+  display: inline-block;
+}
+.avaInput + .avaInputLabel:hover {
+  transition: 1s;
+  color: black;
+}
 .contactsBlock > div {
   margin-left: 2em;
   width: fit-content;

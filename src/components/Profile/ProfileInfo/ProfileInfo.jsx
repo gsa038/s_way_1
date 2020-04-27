@@ -36,11 +36,12 @@ const ProfileInfo = ({ isOwner, userProfile, status, updateStatus, uploadPhoto, 
     return (
         <div>
             <div className={s.description}>
-                <div>
+                <div className={s.avaBlock}>
                     <div className={s.ava_img}>
                         <img src={userProfile.photos.large || defaultUserPhoto} alt="Avatar"></img>
                         {isOwner && <div>
-                            <input type="file" onChange={onMainPhotoSelected} />
+                            <input className={s.avaInput} id="avaFile" type="file" onChange={onMainPhotoSelected} />
+                            <label className={s.avaInputLabel} for="avaFile">Choose a file</label>
                         </div>}
                     </div>
                     <div>

@@ -1,0 +1,11 @@
+.statusBlock {
+    display: flex;
+    justify-content: center;
+}
+.statusMessage {
+    width: fit-content;
+
+}
+.statusInput {
+    width: 138px;
+}

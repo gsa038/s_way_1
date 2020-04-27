@@ -1,9 +1,10 @@
 import React from "react";
 import "./App.css";
 import News from "./components/News/News";
+import ProfileContainer from './components/Profile/ProfileContainer';
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import { Route, withRouter } from "react-router";
+import { Route, withRouter, Switch, Redirect } from "react-router";
 import NavbarContainer from "./components/Navbar/NavbarContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginPage from "./components/Login/LoginContainer";
@@ -11,42 +12,57 @@ import { connect, Provider } from "react-redux";
 import { initializeApp } from './redux/app-reducer';
 import { compose } from "redux";
 import Preloader from "./components/common/Preloader/Preloader";
-import { HashRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import store from "./redux/redux-store";
 import { withSuspense } from "./hoc/withSuspense";
 
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
-const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
+// const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
 
 class App extends React.Component {
+  
+  catchAllUnhadledErrors = (PromiseRejectionEvent) => {
+    alert('Some error occured');
+    // console.log(promiseRejectionEvent);
+  }
 
   componentDidMount() {
     this.props.initializeApp();
+    window.addEventListener('unhandledrejection', this.catchAllUnhadledErrors);
+  }
+
+  componentWillMount() {
+    window.removeEventListener('unhandledrejection', this.catchAllUnhadledErrors);
   }
 
   render() {
-    if (!this.props.initialized) {
+    if (!this.props.initialized) {  
       return <Preloader />
     }
     else {
       return (
         <div>
-          <Route path='/login' render={() => <LoginPage />} />
           <div className="app-wrapper">
             <HeaderContainer />
             <NavbarContainer />
             <div className="app-wrapper-content">
-              <Route path='/profile/:userId?' 
-                      render={withSuspense(ProfileContainer)} />
-              <Route path='/dialogs' 
-                      render={withSuspense(DialogsContainer)} />
-              <Route path='/news  ' render={() => <News />} />
-              <Route path='/music' render={() => <Music />} />
-              <Route path='/users' 
-                      render={withSuspense(UsersContainer)} />
-              <Route path='/settings' render={() => <Settings />} />
+            <Switch>
+                <Route path='/login' render={() => <LoginPage />} />
+                {/* <Route exact path='/login' render={() => <LoginPage />} /> */}
+                <Route exact path='/' render={() => <Redirect to='/profile'/>}/>
+                <Route path='/profile/:userId?'
+                  render={() => <ProfileContainer />} />
+                <Route path='/dialogs'
+                  render={withSuspense(DialogsContainer)} />
+                <Route path='/news  ' render={() => <News />} />
+                <Route path='/music' render={() => <Music />} />
+                <Route path='/users'
+                  render={withSuspense(UsersContainer)} />
+                <Route path='/settings' render={() => <Settings />} />
+                <Route path='*' render={() => <div>404 NOT FOUND</div>} />
+              </Switch>
             </div>
           </div>
         </div>
@@ -55,7 +71,8 @@ class App extends React.Component {
   }
 }
 const mapStateToProps = (state) => ({
-  initialized: state.app.initialized
+  initialized: state.app.initialized,
+  auth: state.auth
 })
 
 let AppContainer = compose(
@@ -65,11 +82,12 @@ let AppContainer = compose(
 
 let MainApp = (props) => {
   return (
-  <HashRouter>
-    <Provider store={store}>
-      <AppContainer />
-    </Provider>
-  </HashRouter >
-)}
+    <BrowserRouter>
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    </BrowserRouter >
+  )
+}
 
 export default MainApp;

@@ -53,16 +53,21 @@ export const getStatus = (userId) => async (dispatch) => {
 }
 
 export const updateStatus = (status) => async (dispatch) => {
-    const response = await profileAPI.updateStatus(status);
-    if (response.data.resultCode === 0)
-    {
-        dispatch(setStatus(status));
+    try {
+        const response = await profileAPI.updateStatus(status);
+        if (response.data.resultCode === 0)
+        {
+            dispatch(setStatus(status));
+        }
+        else
+        {
+            dispatch(setStatus('Can\'t load status message from server'));
+        }
     }
-    else
-    {
-        dispatch(setStatus('Can\'t load status message from server'));
+    catch(error) {
+//
     }
-} 
+}
 
 export const getUserProfile = (userId) => async (dispatch) => {
     const response = await profileAPI.getProfile(userId);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-// import s from './ProfileStatus.module.css';
+import s from './ProfileStatus.module.css';
 
 const ProfileStatusWithHooks = (props) => {
     let [editMode, setEditMode] = useState(false);
@@ -27,13 +27,13 @@ const ProfileStatusWithHooks = (props) => {
     return (
         <div>
             { !editMode && 
-                <div>
-                    <span onDoubleClick={ props.isOwner && activateEditMode } >{props.status || 'Установить статус'}</span>
+                <div className={s.statusBlock}>
+                    <span className={s.statusMessage} onDoubleClick={ props.isOwner && activateEditMode } >{ props.isOwner ? props.status || 'Set status' : props.status || 'Status was\'t set'}</span>
                 </div>
             }
             { editMode &&
                 <div>
-                    <input onChange={ onStatusChange } autoFocus={true} onBlur={ deactivateEditMode } value={ status }></input>
+                    <input className={s.statusInput} onChange={ onStatusChange } autoFocus={true} onBlur={ deactivateEditMode } value={ status }></input>
                 </div>
             }
         </div>

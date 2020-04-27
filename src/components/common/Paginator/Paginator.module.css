@@ -12,14 +12,13 @@
 
 .pageNumber.selectedPage {
     font-weight: 500;
-    background-color: #5cbcf6;
-    border-color: black;
+    background-color: #4CAF50;
+    color: white;
 }
 
 .pageNumber.selectedPage:hover {
-    font-weight: 500;
-    background-color: #5cbcf6;
-}
+    background-color: #0e83cd;
+    transition: 2s;}
 
 .pageNumber {
     display: flex;
@@ -36,7 +35,7 @@
 
 .portionPrevButton, 
 .portionNextButton {
-    background-color: #0e83cd;
+    background-color: #4CAF50;
     color: rgb(255, 255, 255);
     border: none;
     width: 5em;
@@ -46,13 +45,10 @@
     letter-spacing: 1px;
 }
 
-.portionPrevButton:hover {
-    background-color: #5cbcf6;
-    /* transform: skew(+15deg); */
-}
-
+.portionPrevButton:hover,
 .portionNextButton:hover {
-    background-color: #5cbcf6;
+    background-color: #0e83cd;
+    transition: 2s;
     /* transform: skew(-15deg); */
 }
 

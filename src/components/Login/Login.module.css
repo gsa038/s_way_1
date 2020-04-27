@@ -1,9 +1,16 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
-
-.loginPage {
+body {
+  background: #76b852;
+  background: -webkit-linear-gradient(right, #76b852, #8DC26F);
+  background: -moz-linear-gradient(right, #76b852, #8DC26F);
+  background: -o-linear-gradient(right, #76b852, #8DC26F);
+  background: linear-gradient(to left, #76b852, #8DC26F);
+}
+.loginArea {
     width: 360px;
     padding: 8% 0 0;
     margin: auto;
+    margin-left: 30%;
 }
 .loginForm {
     position: relative;
