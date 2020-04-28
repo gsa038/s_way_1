@@ -25,7 +25,7 @@ describe('Paginator component tests', () => {
         nextButton.props.onClick();
         const buttons = root.findAllByType('button');
         expect(buttons.length).toBe(2);
-        expect(buttons[0].children[0]).toBe('PREV');
+        expect(buttons[0].children[0]).toBe('Prev');
         expect(buttons[1].children[0]).toBe('Next');
     });
 

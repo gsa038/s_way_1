@@ -10,7 +10,7 @@ const input = InputArea("input")
 
 const LoginForm = ({ handleSubmit, error, captchaUrl, getCaptcha }) => {
     return (
-        <form className={s.login} onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div className={s.loginArea}>
                 <div className={s.loginForm}>
                     {createField("Email...", "email", [required], input)}
