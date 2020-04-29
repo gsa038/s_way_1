@@ -10,6 +10,7 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginPage from "./components/Login/LoginContainer";
 import { connect, Provider } from "react-redux";
 import { initializeApp } from './redux/app-reducer';
+import { getAuthUserData } from './redux/auth-reducer';
 import { compose } from "redux";
 import Preloader from "./components/common/Preloader/Preloader";
 import { BrowserRouter } from "react-router-dom";
@@ -29,6 +30,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    this.props.getAuthUserData();
     this.props.initializeApp();
     window.addEventListener('unhandledrejection', this.catchAllUnhadledErrors);
   }
@@ -41,15 +43,17 @@ class App extends React.Component {
     if (!this.props.initialized) {
       return <Preloader />
     }
+    else if (!this.props.isAuth) {
+      return <LoginPage />
+    }
     else {
       return (
         <div>
-          <Switch>
-            <Route exact path='/login' render={() => <LoginPage />} />
-            <div className="app-wrapper">
-              <HeaderContainer />
-              <NavbarContainer />
-              <div className="app-wrapper-content">
+          <div className="app-wrapper">
+            <HeaderContainer />
+            <NavbarContainer />
+            <div className="app-wrapper-content">
+              <Switch>
                 <Route exact path='/' render={() => <Redirect to='/profile' />} />
                 <Route path='/profile/:userId?'
                   render={() => <ProfileContainer />} />
@@ -60,10 +64,10 @@ class App extends React.Component {
                 <Route exact path='/users'
                   render={withSuspense(UsersContainer)} />
                 <Route exact path='/settings' render={() => <Settings />} />
-                <Route path='*' render={() => <div>404 NOT FOUND</div>} />
-              </div>
+                <Route render={() => <div>404 NOT FOUND</div>} />
+              </Switch>
             </div>
-          </Switch>
+          </div>
         </div>
       );
     };
@@ -71,12 +75,12 @@ class App extends React.Component {
 }
 const mapStateToProps = (state) => ({
   initialized: state.app.initialized,
-  auth: state.auth
+  isAuth: state.auth.isAuth
 })
 
 let AppContainer = compose(
   withRouter,
-  connect(mapStateToProps, { initializeApp }))(App);
+  connect(mapStateToProps, { initializeApp, getAuthUserData }))(App);
 
 
 let MainApp = (props) => {
