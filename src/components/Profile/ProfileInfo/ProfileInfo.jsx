@@ -64,7 +64,7 @@ const ProfileInfo = ({ isOwner, userProfile, status, updateStatus, uploadPhoto, 
 const ProfileData = ({userProfile, isOwner, goToEditMode}) => {
     return (
     <div className={s.descriptionRightColunn}>
-        {isOwner && <div><button className={s.editDescriptionButton} onClick={goToEditMode}>edit</button></div>}
+        {isOwner && <div className={s.editDescriptionButtonArea}><button className={s.editDescriptionButton} onClick={goToEditMode}>edit</button></div>}
         <div className={s.descriptionItem}><b>Fullname:</b> {userProfile.fullName}</div>
         <div className={s.descriptionItem}><b>Contacts:</b></div>
         <div className={s.contactsBlock}>{

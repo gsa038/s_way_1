@@ -26,6 +26,9 @@
   border-bottom: solid 1px lightgrey;
   width: fit-content;
 }
+.editDescriptionButtonArea {
+  text-align: right;
+}
 .editDescriptionButton {
   font-family: "Roboto", sans-serif;
   border-bottom: none;
@@ -42,6 +45,7 @@
 }
 .editDescriptionButton:hover {
   color: black;
+  font-weight: bold;
   border: solid 1px black;
   transition: all 1s;
 }

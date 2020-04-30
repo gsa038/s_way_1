@@ -9,7 +9,7 @@ const input = InputArea("input");
 const ProfileDataForm = ({handleSubmit, error, initialValues}) => {
     return (
     <form className={s.descriptionRightColunn} onSubmit={handleSubmit}>
-        <div><button className={s.editDescriptionButton}>save</button></div>
+        <div className={s.editDescriptionButtonArea}><button className={s.editDescriptionButton}>save</button></div>
         <div className={s.descriptionItem}>
             <b>Fullname: </b> { createField('Full name', 'fullName', [], input) }
         </div>
