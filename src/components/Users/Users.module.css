@@ -1,6 +1,6 @@
 .userPhoto {
-    width: 150px;
-    border-radius: 5px;
+    width: 10em;
+    border-radius: 0.2em;
 }
 
 .usersContainer {
@@ -14,7 +14,18 @@
 .userItem {
     margin: 5px;
     height: fit-content;
-    width: fit-content;
+    width: 10em;    
     border: 1px solid green;
     border-radius: 5px;
+}
+.userStatus {
+    width: 10em;
+    /* if text line is break show dots */
+    /* show '...' in the begining of overflow */
+    text-overflow: ellipsis;
+    /* show first two lines */
+    white-space: nowrap;
+    /* hide overflowed text */
+    overflow: hidden;
+    /*  */
 }

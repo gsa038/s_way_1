@@ -24,7 +24,7 @@ let User = ({ user, followingInProgress, follow }) => {
                 <span>
                     <span>
                         <div>{user.name}</div>
-                        <div>{user.status}</div>
+                        <div className={s.userStatus}>{user.status}</div>
                     </span>
                 </span>
                 <span>

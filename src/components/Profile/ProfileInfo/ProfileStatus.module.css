@@ -3,8 +3,15 @@
     justify-content: center;
 }
 .statusMessage {
-    width: fit-content;
-
+    width: 10em;
+    /* if text line is break show dots */
+    /* show '...' in the begining of overflow */
+    text-overflow: ellipsis;
+    /* show first two lines */
+    white-space: pre-line;
+    /* hide overflowed text */
+    overflow: hidden;
+    /*  */
 }
 .statusInput {
     width: 138px;
