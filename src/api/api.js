@@ -1,4 +1,4 @@
-import * as axios from 'axios';
+import * as axios from 'axios'
 
 const instance = axios.create({
     withCredentials: true,
@@ -6,7 +6,7 @@ const instance = axios.create({
     headers: {
         "API-KEY": "40a499b6-4421-4c8e-b336-09492ab319c5"
     }
-});
+})
 
 export const usersAPI = {
 
@@ -27,13 +27,13 @@ export const usersAPI = {
 export const authAPI = {
 
     authMe() {
-        return instance.get(`auth/me`);
+        return instance.get(`auth/me`)
     },
     login(email, password, rememberMe=false, captchaString) {
-        return instance.post('/auth/login', {email: email, password: password, rememberMe: rememberMe, captcha: captchaString});
+        return instance.post('/auth/login', {email: email, password: password, rememberMe: rememberMe, captcha: captchaString})
     },
     logout() {
-        return instance.delete('/auth/login');
+        return instance.delete('/auth/login')
     },
     getCaptcha() {
         return instance.get('/security/get-captcha-url')
@@ -49,19 +49,19 @@ export const profileAPI = {
         return instance.get('profile/status/' + userId)
     },
     updateStatus(status) {
-        return instance.put('profile/status/', {status: status});
+        return instance.put('profile/status/', {status: status})
     },
     uploadPhoto(photo) {
-        const formData = new FormData();
-        formData.append('image', photo);
+        const formData = new FormData()
+        formData.append('image', photo)
         return instance.put('profile/photo/', formData, {
             'Content-Type': 'multipath/form-data'
         })
     },
     saveProfile(profileData) {
-        return instance.put('profile', profileData );
+        return instance.put('profile', profileData )
     }
 
 }
 
-export default null;
+export default null

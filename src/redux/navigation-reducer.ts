@@ -11,6 +11,8 @@ let initialState = {
     ]
 }
 
-const navigationReducer =  (state = initialState, action) => state;
+type InitialStateType = typeof initialState
+
+const navigationReducer =  (state: InitialStateType = initialState, action: any) => state
 
 export default navigationReducer;

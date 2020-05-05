@@ -1,42 +1,42 @@
-import React from "react";
-import "./App.css";
-import News from "./components/News/News";
-import ProfileContainer from './components/Profile/ProfileContainer';
-import Music from "./components/Music/Music";
-import Settings from "./components/Settings/Settings";
-import { Route, withRouter, Switch, Redirect } from "react-router";
-import NavbarContainer from "./components/Navbar/NavbarContainer";
-import HeaderContainer from "./components/Header/HeaderContainer";
-import LoginPage from "./components/Login/LoginContainer";
-import { connect, Provider } from "react-redux";
-import { initializeApp } from './redux/app-reducer';
-import { getAuthUserData } from './redux/auth-reducer';
-import { compose } from "redux";
-import Preloader from "./components/common/Preloader/Preloader";
-import { BrowserRouter } from "react-router-dom";
-import store from "./redux/redux-store";
-import { withSuspense } from "./hoc/withSuspense";
+import React from "react"
+import "./App.css"
+import News from "./components/News/News"
+import ProfileContainer from './components/Profile/ProfileContainer'
+import Music from "./components/Music/Music"
+import Settings from "./components/Settings/Settings"
+import { Route, withRouter, Switch, Redirect } from "react-router"
+import NavbarContainer from "./components/Navbar/NavbarContainer"
+import HeaderContainer from "./components/Header/HeaderContainer"
+import LoginPage from "./components/Login/LoginContainer"
+import { connect, Provider } from "react-redux"
+import { initializeApp } from './redux/app-reducer'
+import { getAuthUserData } from './redux/auth-reducer'
+import { compose } from "redux"
+import Preloader from "./components/common/Preloader/Preloader"
+import { BrowserRouter } from "react-router-dom"
+import store from "./redux/redux-store"
+import { withSuspense } from "./hoc/withSuspense"
 
 
-const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
-// const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
-const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
+// const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
+const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'))
 
 class App extends React.Component {
 
   catchAllUnhadledErrors = (PromiseRejectionEvent) => {
-    alert('Some error occured');
-    // console.log(promiseRejectionEvent);
+    alert('Some error occured')
+    // console.log(promiseRejectionEvent)
   }
 
   componentDidMount() {
-    this.props.getAuthUserData();
-    this.props.initializeApp();
-    window.addEventListener('unhandledrejection', this.catchAllUnhadledErrors);
+    this.props.getAuthUserData()
+    this.props.initializeApp()
+    window.addEventListener('unhandledrejection', this.catchAllUnhadledErrors)
   }
 
   componentWillMount() {
-    window.removeEventListener('unhandledrejection', this.catchAllUnhadledErrors);
+    window.removeEventListener('unhandledrejection', this.catchAllUnhadledErrors)
   }
 
   render() {
@@ -69,8 +69,8 @@ class App extends React.Component {
             </div>
           </div>
         </div>
-      );
-    };
+      )
+    }
   }
 }
 const mapStateToProps = (state) => ({
@@ -80,7 +80,7 @@ const mapStateToProps = (state) => ({
 
 let AppContainer = compose(
   withRouter,
-  connect(mapStateToProps, { initializeApp, getAuthUserData }))(App);
+  connect(mapStateToProps, { initializeApp, getAuthUserData }))(App)
 
 
 let MainApp = (props) => {
@@ -93,4 +93,4 @@ let MainApp = (props) => {
   )
 }
 
-export default MainApp;
+export default MainApp

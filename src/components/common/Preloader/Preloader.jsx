@@ -1,6 +1,6 @@
 
-import React from 'react';
-import s from './Preloader.module.css';
+import React from 'react'
+import s from './Preloader.module.css'
 
 let Preloader = (props) => {
     return <div className={s.preloader}>
@@ -25,4 +25,4 @@ let Preloader = (props) => {
     </div>
 }
 
-export default Preloader;
+export default Preloader
