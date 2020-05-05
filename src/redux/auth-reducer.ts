@@ -12,7 +12,13 @@ let initialState = {
     captchaUrl: null //if null then captcha is not required
 };
 
-const authReducer = ( state = initialState, action) => {
+type setAuthUserDataActionType = {type: typeof SET_USER_DATA, payload: {userId: number, email: string, login: string, isAuth: boolean, captchaUrl: string}};
+type getCaptchaUrlActionType = {type: typeof GET_CAPTCHA_IRL, payload: {captchaUrl: string}};
+
+type ActionTypes =  setAuthUserDataActionType |
+                    getCaptchaUrlActionType
+
+const authReducer = ( state = initialState, action: ActionTypes) => {
 
     switch(action.type) {
         case SET_USER_DATA:
@@ -26,17 +32,17 @@ const authReducer = ( state = initialState, action) => {
         };
 };
 
-export const setAuthUserData = (userId, email, login, isAuth, captchaUrl=null) => ({type: SET_USER_DATA, payload: {userId, email, login, isAuth, captchaUrl}});
-export const getCaptchaUrl = (captchaUrl=null) => ({type: GET_CAPTCHA_IRL, payload: {captchaUrl}});
+export const setAuthUserData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean, captchaUrl: string | null = null) => ({type: SET_USER_DATA, payload: {userId, email, login, isAuth, captchaUrl}});
+export const getCaptchaUrl = (captchaUrl: string | null = null) => ({type: GET_CAPTCHA_IRL, payload: {captchaUrl}});
 
-export const getCaptcha = () => async (dispatch) => {
+export const getCaptcha = () => async (dispatch: Function) => {
     const response = await authAPI.getCaptcha()
     if (response.data.url) {
         dispatch(getCaptchaUrl(response.data.url));
     }
 }
 
-export const getAuthUserData = () => async (dispatch) => {
+export const getAuthUserData = () => async (dispatch: Function) => {
     const response = await authAPI.authMe()
     if (response.data.resultCode === 0) {
         const {id, login, email} = response.data.data;
@@ -44,7 +50,7 @@ export const getAuthUserData = () => async (dispatch) => {
     };
 };
 
-export const doLogin = (email, password, rememberMe, captchaString) => async (dispatch) => {
+export const doLogin = (email: string, password: string, rememberMe: boolean, captchaString: string) => async (dispatch: Function) => {
     const response = await authAPI.login(email, password, rememberMe, captchaString)
     if (response.data.resultCode === 0) {
         dispatch(getAuthUserData());
@@ -58,7 +64,7 @@ export const doLogin = (email, password, rememberMe, captchaString) => async (di
     };
 };
 
-export const doLogout = () => async (dispatch) => {
+export const doLogout = () => async (dispatch: Function) => {
     const response = await authAPI.logout()
     if (response.data.resultCode === 0) {
         dispatch(setAuthUserData(null, null, null, false));
