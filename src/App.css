@@ -1,3 +1,9 @@
+.preloaderArea {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
 .app-wrapper {
   display: grid;
   grid-template-areas: "h h" "n c";

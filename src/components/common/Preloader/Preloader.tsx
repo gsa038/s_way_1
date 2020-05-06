@@ -2,7 +2,11 @@
 import React from 'react'
 import s from './Preloader.module.css'
 
-let Preloader = (props) => {
+type PropsType = {
+    
+}
+ 
+let Preloader = (props: PropsType) => {
     return <div className={s.preloader}>
         <div className={s.ldsRoller}>
             <div>

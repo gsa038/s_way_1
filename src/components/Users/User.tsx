@@ -2,8 +2,20 @@ import React from 'react';
 import s from './Users.module.css';
 import userPhoto from '../../assets/images/236832.png';
 import { NavLink } from 'react-router-dom';
+import { UserType } from '../../types/types';
 
-let User = ({ user, followingInProgress, follow }) => {
+type StatePropsType = {
+    user: UserType
+}
+
+type DistpachPropsType = {
+    followingInProgress: Array<Object>,
+    follow: (follow: boolean, userId: number) => void
+}
+
+type PropsType = StatePropsType & DistpachPropsType
+
+let User = ({ user, followingInProgress, follow }: PropsType) => {
     return (
         <div className={s.userItem}>
             <span>

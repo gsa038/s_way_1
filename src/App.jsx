@@ -24,7 +24,7 @@ const UsersContainer = React.lazy(() => import('./components/Users/UsersContaine
 
 class App extends React.Component {
 
-  catchAllUnhadledErrors = (PromiseRejectionEvent) => {
+  catchAllUnhadledErrors = () => {
     alert('Some error occured')
     // console.log(promiseRejectionEvent)
   }
@@ -41,7 +41,7 @@ class App extends React.Component {
 
   render() {
     if (!this.props.initialized) {
-      return <Preloader />
+      return <div className="preloaderArea"><Preloader /></div>
     }
     else if (!this.props.isAuth) {
       return <LoginPage />
@@ -62,7 +62,7 @@ class App extends React.Component {
                 <Route exact path='/news  ' render={() => <News />} />
                 <Route exact path='/music' render={() => <Music />} />
                 <Route exact path='/users'
-                  render={withSuspense(UsersContainer)} />
+                  render={withSuspense(UsersContainer, {pageTitle: "Users Page"})} />
                 <Route exact path='/settings' render={() => <Settings />} />
                 <Route render={() => <div>404 NOT FOUND</div>} />
               </Switch>
@@ -83,7 +83,7 @@ let AppContainer = compose(
   connect(mapStateToProps, { initializeApp, getAuthUserData }))(App)
 
 
-let MainApp = (props) => {
+let MainApp = () => {
   return (
     <BrowserRouter>
       <Provider store={store}>

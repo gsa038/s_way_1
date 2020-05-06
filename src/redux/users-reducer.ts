@@ -8,7 +8,7 @@ const SET_TOTAL_COUNT = 's_way_1/users/SET_TOTAL_COUNT'
 const TOGGLE_IS_FETCHING = 's_way_1/users/TOGGLE_IS_FETCHING'
 const TOGGLE_IS_FOLLOWING_PROGRESS = 's_way_1/users/TOGGLE_IS_FOLLOWING_PROGRESS'
 
-let initialState = {
+let initialState = {    
     users: [] as Array<UserType>,
     pageSize: 100,
     totalUsersCount: 0,
@@ -19,7 +19,7 @@ let initialState = {
 
 type InitialStateType = typeof initialState
 
-type ToggleFollowActionType = {type: typeof TOGGLE_FOLLOW, userId: number}
+export type ToggleFollowActionType = {type: typeof TOGGLE_FOLLOW, userId: number}
 type SetUsersActionType = {type: typeof SET_USERS, users: Array<UserType>}
 type SetCurrentPageActioType = {type: typeof SET_CURRENT_PAGE, currentPage: number}
 type SetTotalUsersCountActionType = {type: typeof SET_TOTAL_COUNT, totalUsersCount: number}
