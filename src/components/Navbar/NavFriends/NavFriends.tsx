@@ -1,8 +1,9 @@
 import React from 'react';
 import s from './NavFriends.module.css';
 import NavFriendsItem from './NavFriendsItem/NavFriendsItem'; 
+import { NavbarInitialStateType } from '../../../redux/navigation-reducer'
 
-const NavFriends = (props) => {
+const NavFriends: React.FC<NavbarInitialStateType> = (props) => {
     
     let NavFriendsElements = props.friends.map(f => (<NavFriendsItem nickname={f.nickname} key={f.id} ava={f.ava} />))
 

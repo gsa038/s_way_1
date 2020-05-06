@@ -2,12 +2,12 @@ import { DialogType, MessageType } from "../types/types";
 
 const SEND_MESSAGE = 's_way_1/dialogs/SEND-MESSAGE'
 
-type InitialStateType = {
+export type DialogsStateType = {
     dialogs: Array<DialogType>,
     messages: Array<MessageType>
 }
 
-let initialState: InitialStateType = {
+let initialState: DialogsStateType = {
     dialogs: [
         { id: 1, name: "Helen" },
         { id: 2, name: "Alex" },
@@ -23,7 +23,9 @@ let initialState: InitialStateType = {
     ]
 }
 
-const dialogsReducer =  (state = initialState, action): InitialStateType => {
+type ActionsType = SendMessageActionType
+
+const dialogsReducer =  (state = initialState, action: ActionsType): DialogsStateType => {
     switch(action.type) {
         case SEND_MESSAGE:
             return {
@@ -35,11 +37,11 @@ const dialogsReducer =  (state = initialState, action): InitialStateType => {
     }
 }
 
-export type SendMessageType = {
+export type SendMessageActionType = {
     type: typeof SEND_MESSAGE,
     newMessageText: string
 }
 
-export const sendMessage = (newMessageText: string): SendMessageType => ({ type: SEND_MESSAGE, newMessageText })
+export const sendMessage = (newMessageText: string): SendMessageActionType => ({ type: SEND_MESSAGE, newMessageText })
 
 export default dialogsReducer

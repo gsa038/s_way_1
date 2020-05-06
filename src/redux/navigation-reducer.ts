@@ -11,8 +11,8 @@ let initialState = {
     ]
 }
 
-type InitialStateType = typeof initialState
+export type NavbarInitialStateType = typeof initialState
 
-const navigationReducer =  (state: InitialStateType = initialState, action: any) => state
+const navigationReducer =  (state: NavbarInitialStateType = initialState, action: any) => state
 
 export default navigationReducer;

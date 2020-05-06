@@ -2,9 +2,11 @@ import React from 'react';
 import s from './NavMenu.module.css';
 import { NavLink } from 'react-router-dom';
 
+type PropsType = {
+    
+}
 
-
-const NavMenu = (props) => {
+const NavMenu: React.FC<PropsType> = (props) => {
     return (
         <nav className={s.nav}>
             <div className={`${s.item} ${s.active}`}>

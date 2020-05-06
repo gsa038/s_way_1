@@ -6,7 +6,7 @@ type PropsType = {
     
 }
  
-let Preloader = (props: PropsType) => {
+let Preloader: React.FC<PropsType> = (props) => {
     return <div className={s.preloader}>
         <div className={s.ldsRoller}>
             <div>

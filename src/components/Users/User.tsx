@@ -13,9 +13,9 @@ type DistpachPropsType = {
     follow: (follow: boolean, userId: number) => void
 }
 
-type PropsType = StatePropsType & DistpachPropsType
+export type UserPropsType = StatePropsType & DistpachPropsType
 
-let User = ({ user, followingInProgress, follow }: PropsType) => {
+let User = ({ user, followingInProgress, follow }: UserPropsType) => {
     return (
         <div className={s.userItem}>
             <span>

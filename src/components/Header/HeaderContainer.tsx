@@ -4,15 +4,28 @@ import { connect } from 'react-redux';
 import {doLogout} from '../../redux/auth-reducer';
 import { compose } from 'redux';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { AppStateType } from '../../redux/redux-store';
 
-class HeaderContainer extends React.Component {
+type MapStatePropsType = {
+    isAuth: boolean,
+    login: string | null,
+    userId: number | null
+}
+
+type MapDispatchPropsType = {
+    doLogout: () => void
+}
+
+export type HeaderPropsType = MapStatePropsType & MapDispatchPropsType
+
+class HeaderContainer extends React.Component<HeaderPropsType> {
     
     render() {
         return this.props.isAuth && <Header {...this.props} />
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType):MapStatePropsType => ({
     isAuth: state.auth.isAuth,
     login: state.auth.login,
     userId: state.auth.userId

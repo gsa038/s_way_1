@@ -1,8 +1,9 @@
-import React from 'react';
-import s from './Header.module.css';
-import { NavLink } from 'react-router-dom';
+import React from 'react'
+import s from './Header.module.css'
+import { NavLink } from 'react-router-dom'
+import { HeaderPropsType } from './HeaderContainer'
 
-const Header = (props) => {
+const Header: React.FC<HeaderPropsType> = (props) => {
     return (
         <header className={s.header}>
             <img src="https://www.quizony.com/company-name-generator/imageForSharing.jpg" alt="Company name"></img>
@@ -18,4 +19,4 @@ const Header = (props) => {
     );
 }
 
-export default Header;
+export default Header

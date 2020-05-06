@@ -34,7 +34,7 @@ type SetUserProfilleActionType = { type: typeof SET_USER_PROFILE, userProfile: P
 type SetStatusActionType = { type: typeof SET_STATUS, status: string}
 type UploadPhotoSuccessType = { type: typeof UPLOAD_PHOTO_SUCCESS, photos: PhotosType}
 
-export type ActionTypes =  AddPostActionType |
+type ActionTypes =  AddPostActionType |
                             DeletePostActionType |
                             SetUserProfilleActionType |
                             SetStatusActionType |

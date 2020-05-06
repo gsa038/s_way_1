@@ -15,6 +15,12 @@ export type ContactsType = {
     mainLink: string
 }
 
+export type FriendType = {
+    id: number,
+    nickname: string,
+    ava: string
+}
+
 export type PhotosType = {
     small: string | null,
     large: string | null
