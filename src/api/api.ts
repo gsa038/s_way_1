@@ -26,7 +26,10 @@ export const usersAPI = {
 
 export enum ResultCodeEnum {
     Success = 0,
-    Error = 1,
+    Error = 1
+}
+
+export enum ResultCodeForCaptchaEnum {
     CaptchaIsRequired = 10
 }
 
@@ -40,13 +43,21 @@ type AuthMeResponseType = {
     messages: Array<string>
 }
 
+type LoginResponseType = {
+    data: { 
+        userId: number
+    }
+    resultCode: ResultCodeEnum | ResultCodeForCaptchaEnum
+    messages: Array<string>
+}
+
 
 export const authAPI = {
     authMe() {
         return instance.get<AuthMeResponseType>(`auth/me`).then(res => res.data)
     },
     login(email: string, password: string, rememberMe: boolean = false, captchaString: string | null = null) {
-        return instance.post('/auth/login', {email: email, password: password, rememberMe: rememberMe, captcha: captchaString})
+        return instance.post<LoginResponseType>('/auth/login', {email: email, password: password, rememberMe: rememberMe, captcha: captchaString}).then(res => res.data)
     },
     logout() {
         return instance.delete('/auth/login')

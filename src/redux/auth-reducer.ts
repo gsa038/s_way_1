@@ -1,4 +1,4 @@
-import { authAPI, ResultCodeEnum } from "../api/api"
+import { authAPI, ResultCodeEnum, ResultCodeForCaptchaEnum } from "../api/api"
 import { stopSubmit } from 'redux-form'
 
 const SET_USER_DATA = 's_way_1/auth/SET_USER_DATA'
@@ -54,15 +54,15 @@ export const getAuthUserData = () => async (dispatch: Function) => {
 };
 
 export const doLogin = (email: string, password: string, rememberMe: boolean, captchaString: string) => async (dispatch: Function) => {
-    const response = await authAPI.login(email, password, rememberMe, captchaString)
-    if (response.data.resultCode === ResultCodeEnum.Success) {
+    const loginData = await authAPI.login(email, password, rememberMe, captchaString)
+    if (loginData.resultCode === ResultCodeEnum.Success) {
         dispatch(getAuthUserData())
     }
     else {
-        if (response.data.resultCode === ResultCodeEnum.CaptchaIsRequired) {
+        if (loginData.resultCode === ResultCodeForCaptchaEnum.CaptchaIsRequired) {
             dispatch(getCaptcha())
         }
-        const message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error";
+        const message = loginData.messages.length > 0 ? loginData.messages[0] : "Some error";
         dispatch(stopSubmit("login", {_error: message}))
     };
 };
