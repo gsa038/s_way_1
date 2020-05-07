@@ -1,13 +1,39 @@
-import React, { useState } from 'react';
-import s from './ProfileInfo.module.css';
-import Preloader from '../../common/Preloader/Preloader';
-import defaultUserPhoto from '../../../assets/images/236832.png';
-// import ProfileStatus from './ProfileStatus';
-import ProfileStatusWithHooks from './ProfileStatusWithHooks';
-import cn from 'classnames';
-import ProfileDataForm from './ProfileDataForm';
+import React, { useState, ChangeEvent } from 'react'
+import s from './ProfileInfo.module.css'
+import Preloader from '../../common/Preloader/Preloader'
+import defaultUserPhoto from '../../../assets/images/236832.png'
+import ProfileStatusWithHooks from './ProfileStatusWithHooks'
+import ProfileDataForm from './ProfileDataForm'
+import { AuthStateType } from '../../../redux/auth-reducer'
+import { ProfileStateType } from '../../../redux/profile-reducer'
 
-const ProfileInfo = ({ isOwner, userProfile, status, updateStatus, uploadPhoto, saveProfile }) => {
+type MatchParamType = {
+    params: {
+        userId: number
+    }
+}
+
+type MapStatePropsType = {
+    userProfile: ProfileStateType,
+    status?: string,
+    auth?: AuthStateType,
+    match?: MatchParamType
+}
+
+type MapDispatchPropsType = {
+    updateStatus: () => void,
+    uploadPhoto: () => void,
+    saveProfile: () => void
+}
+
+type OwnDispatchPropsType = {
+    isOwner: boolean
+}
+
+export type ProfileInfoPropsType = MapStatePropsType & MapDispatchPropsType & OwnDispatchPropsType
+
+
+const ProfileInfo: React.FC<ProfileInfoPropsType> = ({ isOwner, userProfile, status, updateStatus, uploadPhoto, saveProfile }) => {
     
     let [editMode, setEditMode] = useState(false);
     const deactivateEditMode = () => {
@@ -17,8 +43,10 @@ const ProfileInfo = ({ isOwner, userProfile, status, updateStatus, uploadPhoto, 
         return <Preloader />
     }
 
-    const onMainPhotoSelected = (e) => {
+    const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
+        // @ts-ignore
         if (e.target.files.length) {
+            // @ts-ignore
             uploadPhoto(e.target.files[0]);
         }
     }

@@ -1,4 +1,4 @@
-import { authAPI } from "../api/api"
+import { authAPI, ResultCodeEnum } from "../api/api"
 import { stopSubmit } from 'redux-form'
 
 const SET_USER_DATA = 's_way_1/auth/SET_USER_DATA'
@@ -12,16 +12,16 @@ let initialState = {
     captchaUrl: null as string | null 
 };
 
-type InitialStateType = typeof initialState
+export type AuthStateType = typeof initialState
 
-type SetAuthUserDataPayloadType = InitialStateType
+type SetAuthUserDataPayloadType = AuthStateType
 type SetAuthUserDataActionType = {type: typeof SET_USER_DATA, payload: SetAuthUserDataPayloadType}
 type GetCaptchaUrlActionType = {type: typeof GET_CAPTCHA_IRL, payload: {captchaUrl: string}}
 
 type ActionTypes =  SetAuthUserDataActionType |
                     GetCaptchaUrlActionType
 
-const authReducer = ( state = initialState, action: ActionTypes): InitialStateType => {
+const authReducer = ( state = initialState, action: ActionTypes): AuthStateType => {
 
     switch(action.type) {
         case SET_USER_DATA:
@@ -46,20 +46,20 @@ export const getCaptcha = () => async (dispatch: Function) => {
 }
 
 export const getAuthUserData = () => async (dispatch: Function) => {
-    const response = await authAPI.authMe()
-    if (response.data.resultCode === 0) {
-        const {id, login, email} = response.data.data;
+    const authMeData = await authAPI.authMe()
+    if (authMeData.resultCode === ResultCodeEnum.Success) {
+        const {id, login, email} = authMeData.data;
         dispatch(setAuthUserData(id, email, login, true))
     };
 };
 
 export const doLogin = (email: string, password: string, rememberMe: boolean, captchaString: string) => async (dispatch: Function) => {
     const response = await authAPI.login(email, password, rememberMe, captchaString)
-    if (response.data.resultCode === 0) {
+    if (response.data.resultCode === ResultCodeEnum.Success) {
         dispatch(getAuthUserData())
     }
     else {
-        if (response.data.resultCode === 10) {
+        if (response.data.resultCode === ResultCodeEnum.CaptchaIsRequired) {
             dispatch(getCaptcha())
         }
         const message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error";

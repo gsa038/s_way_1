@@ -1,5 +1,8 @@
 import {usersAPI} from '../api/api'
 import { UserType } from '../types/types'
+import { ThunkAction } from 'redux-thunk'
+import { Dispatch } from 'redux'
+import { AppStateType } from './redux-store'
 
 const TOGGLE_FOLLOW = 's_way_1/users/TOGGLE_FOLLOW'
 const SET_USERS = 's_way_1/users/SET_USERS'
@@ -17,7 +20,7 @@ let initialState = {
     followingInProgress: [] as Array<number> // array of users Id
 }
 
-type InitialStateType = typeof initialState
+export type UsersStateType = typeof initialState
 
 export type ToggleFollowActionType = {type: typeof TOGGLE_FOLLOW, userId: number}
 type SetUsersActionType = {type: typeof SET_USERS, users: Array<UserType>}
@@ -33,7 +36,12 @@ type ActionTypes =  SetUsersActionType |
                     ToggleIsFetchingActionType |
                     ToggleFollowingProgressActionType
 
-const usersReducer = ( state = initialState, action: ActionTypes):InitialStateType => {
+
+type ThunkType = ThunkAction<Promise<void>, UsersStateType, unknown, ActionTypes>
+type GetStateType = () => AppStateType
+type DispatchType = Dispatch<ActionTypes>
+
+const usersReducer = ( state = initialState, action: ActionTypes):UsersStateType => {
 
     switch(action.type) {
         case TOGGLE_FOLLOW:
@@ -78,7 +86,7 @@ export const setTotalUsersCount = (totalUsersCount: number): SetTotalUsersCountA
 export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingActionType => ({type: TOGGLE_IS_FETCHING, isFetching})
 export const toggleFollowingProgress = (followingInProgress: boolean, userId: number): ToggleFollowingProgressActionType => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, followingInProgress, userId})
 
-export const getUsers = (page: number, pageSize: number) => async (dispatch: Function) => {
+export const getUsers = (page: number, pageSize: number): ThunkType => async (dispatch) => {
     dispatch(toggleIsFetching(true))
     dispatch(setCurrentPage(page))
 
@@ -88,7 +96,7 @@ export const getUsers = (page: number, pageSize: number) => async (dispatch: Fun
     dispatch(setTotalUsersCount(data.totalCount))
 }
 
-export const follow = (follow: boolean, userId: number) => async (dispatch: Function) => {
+export const follow = (follow: boolean, userId: number) => async (dispatch: DispatchType, getState: GetStateType) => {
     dispatch(toggleFollowingProgress(true, userId))
     let data = await usersAPI.follow(follow, userId)
     if (data.resultCode === 0 || 1) {

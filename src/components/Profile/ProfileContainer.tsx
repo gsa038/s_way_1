@@ -1,12 +1,41 @@
 import React from 'react';
 import Profile from './Profile';
 import { connect } from 'react-redux';
-import { setUserProfile, getUserProfile, getStatus, updateStatus, uploadPhoto, saveProfile } from '../../redux/profile-reducer.ts'
+import { setUserProfile, getUserProfile, getStatus, updateStatus, uploadPhoto, saveProfile, ProfileStateType } from '../../redux/profile-reducer'
+import { AuthStateType } from '../../redux/auth-reducer'
 import { withRouter } from 'react-router';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
 
-class ProfileContainer extends React.Component {
+type MatchParamType = {
+    params: {
+        userId: number
+    }
+}
+
+type MapStatePropsType = {
+    userProfile: ProfileStateType,
+    status: string,
+    auth: AuthStateType,
+    match: MatchParamType
+}
+
+type MapDispatchPropsType = {
+    getUserProfile: (userId: number | null) => void,
+    getStatus: (userId: number | null) => void,
+    setUserProfile: () => void, 
+    updateStatus: () => void,
+    uploadPhoto: () => void,
+    saveProfile: () => void
+}
+
+type OwnDispatchPropsType = {
+    isOwner: boolean
+}
+
+export type ProfilePropsType = MapStatePropsType & MapDispatchPropsType & OwnDispatchPropsType
+
+class ProfileContainer extends React.Component<ProfilePropsType> {
 
     refreshProfile() {
         let userId = this.props.match.params.userId || this.props.auth.userId;

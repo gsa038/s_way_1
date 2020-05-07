@@ -1,4 +1,5 @@
 import { getAuthUserData } from "./auth-reducer";
+import { ThunkAction } from "redux-thunk";
 
 const SET_INITIALIZED = 's_way_1/app/SET_INITIALIZED';
 
@@ -29,7 +30,7 @@ type InitializedSuccessType = {
 
 export const setInitializedSuccess = (): InitializedSuccessType => ({type: SET_INITIALIZED});
  
-export const initializeApp = () => (dispatch) => {
+export const initializeApp = (): ThunkAction<Promise<void> | void, InitialStateType, unknown, InitializedSuccessType> => (dispatch) => {
     let promise = dispatch(getAuthUserData());
     Promise.all([promise]).then(() => { 
         dispatch(setInitializedSuccess());
