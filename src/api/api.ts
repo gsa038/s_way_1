@@ -22,7 +22,7 @@ type ErrorResponseStandardType = {message: string}
 
 type GetUsersResponseType = {
     items: Array<UserType>,
-    totalUsersCount: number,
+    totalCount: number,
     error: string
 }
 
@@ -87,9 +87,9 @@ export const authAPI = {
     }
 }
 
-type GetProfileResponseType = ProfileType | ErrorResponseStandardType
+type GetProfileResponseType = ProfileType //| ErrorResponseStandardType
 
-type GetStatusResponseType = string | ErrorResponseStandardType
+type GetStatusResponseType = string  //| ErrorResponseStandardType
 
 type UpdateStatusResponseType = {
     resultCode: ResultCodeEnum,
@@ -99,7 +99,9 @@ type UpdateStatusResponseType = {
 }
 
 type UploadFotoResponseType = {
-    data: PhotosType,
+    data: {
+        photos: PhotosType
+    }
     resultCode: ResultCodeEnum,
     messages: Array<string>
 }
@@ -115,7 +117,7 @@ export const profileAPI = {
         return instance.get<GetProfileResponseType>(`profile/` + userId)
     },
     getStatus(userId: number) {
-        return instance.get<GetStatusResponseType>('profile/status/' + userId)
+        return instance.get<GetStatusResponseType>('profile/status/' + userId).then(res => res.data)
     },
     updateStatus(status: string) {
         return instance.put<UpdateStatusResponseType>('profile/status/', {status: status})

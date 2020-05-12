@@ -6,6 +6,7 @@ import { AuthStateType } from '../../redux/auth-reducer'
 import { withRouter } from 'react-router';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
+import { ProfileType } from '../../types/types';
 
 type MatchParamType = {
     params: {
@@ -26,7 +27,7 @@ type MapDispatchPropsType = {
     setUserProfile: () => void, 
     updateStatus: () => void,
     uploadPhoto: () => void,
-    saveProfile: () => void
+    saveProfile: (formData: ProfileType) => Promise<void>
 }
 
 type OwnDispatchPropsType = {

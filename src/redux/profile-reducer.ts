@@ -1,7 +1,7 @@
-import { profileAPI } from "../api/api";
-import { stopSubmit } from 'redux-form';
-import { PostType, ProfileType, PhotosType } from "../types/types";
-import { ThunkAction } from "redux-thunk";
+import { profileAPI } from "../api/api"
+import { stopSubmit } from 'redux-form'
+import { PostType, ProfileType, PhotosType } from "../types/types"
+import { ThunkAction } from "redux-thunk"
 
 const ADD_POST = 's_way_1/pofile/ADD_POST'
 const DELETE_POST = 's_way_1/pofile/DELETE_POST'
@@ -70,16 +70,16 @@ export const setStatus = (status: string): SetStatusActionType =>  ({ type: SET_
 export const uploadPhotoSuccess = (photos: PhotosType): UploadPhotoSuccessType => ({ type: UPLOAD_PHOTO_SUCCESS, photos})
 
 export const getStatus = (userId) => async (dispatch) => {
-    const response = await profileAPI.getStatus(userId);
-    dispatch(setStatus(response.data));
+    const status = await profileAPI.getStatus(userId);
+    dispatch(setStatus(status));
 }
 
-export const getUserProfile = (userId: number): ThunkType => async (dispatch: Function) => {
+export const getUserProfile = (userId: number): ThunkType => async (dispatch) => {
     const response = await profileAPI.getProfile(userId);
     dispatch(setUserProfile(response.data));
 }
 
-export const uploadPhoto = (file: BinaryType): ThunkType => async (dispatch: Function) => {
+export const uploadPhoto = (file: BinaryType): ThunkType => async (dispatch) => {
     const response = await profileAPI.uploadPhoto(file);
     if (response.status === 200)
     {
@@ -87,10 +87,8 @@ export const uploadPhoto = (file: BinaryType): ThunkType => async (dispatch: Fun
     }
 }
 
-export const saveProfile = (profileData: ProfileType): ThunkType => async (dispatch: Function, getState: any) => {
-    console.log(profileData)
+export const saveProfile = (profileData: ProfileType) => async (dispatch, getState) => {
     const response = await profileAPI.saveProfile(profileData);
-    console.log(response)
     if (response.data.resultCode === 0)
     {        
         dispatch(getUserProfile(getState().auth.userId))

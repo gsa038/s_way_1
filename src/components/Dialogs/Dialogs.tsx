@@ -41,7 +41,10 @@ const Dialogs: React.FC<DialogsPropsType> = ({dialogsPage, sendMessage}) => {
                 <div className={s.messages}>
                     {messagesElements}
                 </div>
+                {
+                //@ts-ignore
                 <AddMessageFormRedux onSubmit={addNewMessage} />
+                }
             </div>
         </div>
     );

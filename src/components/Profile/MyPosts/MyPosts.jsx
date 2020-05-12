@@ -9,7 +9,6 @@ const maxPostLength10 = maxlength(10, 'post');
 const textArea = InputArea("textarea")
 
 const MyPosts = props => {
-    console.log('render MyPosts')
     let postsElements = props.posts.map( p => <Post message={p.message} key={p.id} likesCounts={p.likesCounts}/>);
     let addPost = (values) => {
         props.addPost(values.newPostText);
