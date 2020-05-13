@@ -4,7 +4,7 @@ import Login from './Login';
 import { AppStateType } from '../../redux/redux-store';
 
 type MapStatePropsType = {
-    isAuth: boolean,
+    isAuth: boolean
     captchaUrl: string | null
 }
 

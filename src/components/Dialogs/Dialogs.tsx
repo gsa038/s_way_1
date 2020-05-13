@@ -19,18 +19,17 @@ type DispatchPropsType = {
 
 export type DialogsPropsType = StatePropsType & DispatchPropsType
 
-type AddNewMessageType = (newMessageText: string | null) => void
+type AddNewMessageType = (handleSubmit : {newMessageText: string | null}) => void
 
-const Dialogs: React.FC<DialogsPropsType> = ({dialogsPage, sendMessage}) => {
+const Dialogs = ({dialogsPage, sendMessage}) => {
 
-    let dialogsElements = dialogsPage.dialogs.map(d => (<DialogItem name={d.name} key={d.id} id={d.id} />));
-    let messagesElements = dialogsPage.messages.map(m => (<Message message={m} key={m.id} />));
+    const dialogsElements = dialogsPage.dialogs.map(d => (<DialogItem name={d.name} key={d.id} id={d.id} />));
+    const messagesElements = dialogsPage.messages.map(m => (<Message message={m} key={m.id} />));
 
-    let addNewMessage: AddNewMessageType = (newMessageText) => {
-        sendMessage(newMessageText)
-        newMessageText = null;
+    const addNewMessage = (handleSubmit) => {
+        sendMessage(handleSubmit.newMessageText)
+        handleSubmit.newMessageText = null;
     }
-
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
@@ -42,7 +41,6 @@ const Dialogs: React.FC<DialogsPropsType> = ({dialogsPage, sendMessage}) => {
                     {messagesElements}
                 </div>
                 {
-                //@ts-ignore
                 <AddMessageFormRedux onSubmit={addNewMessage} />
                 }
             </div>

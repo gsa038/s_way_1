@@ -10,11 +10,11 @@ const SET_STATUS = 's_way_1/pofile/SET_STATUS'
 const UPLOAD_PHOTO_SUCCESS = 's_way_1/pofile/UPLOAD_PHOTO_SUCCESS'
 
 export type ProfileStateType = {
-    posts: Array<PostType>,
+    posts: Array<PostType | null>,
     status: string | null,
-    userProfile: ProfileType | null,
+    userProfile?: ProfileType | null,
     newPostText: string | null,
-    photos?: PhotosType
+    photos: PhotosType | null
 }
 
 let initialState: ProfileStateType = {
@@ -26,7 +26,8 @@ let initialState: ProfileStateType = {
     ],
     status: null,
     userProfile: null, 
-    newPostText: null
+    newPostText: null,
+    photos: null
 }
 
 type AddPostActionType = { type: typeof ADD_POST, newPostText: string}
@@ -51,7 +52,7 @@ const profileReducer = (state: ProfileStateType = initialState, action: ActionTy
                 posts: [...state.posts, { id: 5, message: action.newPostText, likesCounts: 0 }]
             };
         case DELETE_POST:
-            return { ...state, posts: state.posts.filter(p => p.id !== action.postId) }
+            return { ...state, posts: state.posts.filter(p => p!.id !== action.postId) }
         case SET_USER_PROFILE:
             return { ...state, userProfile: action.userProfile};
         case SET_STATUS:
@@ -117,7 +118,6 @@ export const updateStatus = (status: string): ThunkType => async (dispatch: Func
         }
     }
     catch(error) {
-//
     }
 }
 
